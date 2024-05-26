@@ -1,9 +1,55 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+## Requisitos
+
+- Node v18.17+
 
 ## Getting Started
 
-First, run the development server:
+Clone Project:
+```bash
+git clone https://github.com/AsatoTexco/ThorFlix
+```
 
+Instalando as Dependências:
+```bash
+/thorflix
+
+npm install
+# or
+yarn install
+# or 
+pnpm install
+# or 
+bun install 
+```
+Crie o arquivo `.env` em `/thorflix` e defina as seguintes variaveis de ambiente:
+```env
+
+# Banco Postgres Vercel
+POSTGRES_URL=""
+POSTGRES_PRISMA_URL=""
+POSTGRES_URL_NO_SSL=""
+POSTGRES_URL_NON_POOLING=""
+POSTGRES_USER="default"
+POSTGRES_HOST=""
+POSTGRES_PASSWORD=""
+POSTGRES_DATABASE=""
+
+JWT_WEB_TOKEN="JeraRush"
+
+# Dados do Aplicativo criado no Facebook
+FACEBOOK_CLIENT_ID=""
+FACEBOOK_CLIENT_SECRET=""
+NEXTAUTH_URL="http://localhost:3000"
+NEXTAUTH_SECRET="ThorAuth"
+
+# Token de autorização para API TheMovieDB(TMDB)
+# https://developer.themoviedb.org/reference/
+MOVIE_API=""
+
+```
+Com essas configurações você está pronto para executar o ThorFlix
+
+Executar:
 ```bash
 npm run dev
 # or
@@ -14,23 +60,154 @@ pnpm dev
 bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+Abra [http://localhost:3000](http://localhost:3000) em seu navegador para visualizar o Resultado.
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+Obs: Se o Aplicativo do Facebook estiver em desenvolvimento, apenas será possível coletar dados e fazer login com a conta do Facebook que possui alguma permissão dentro do aplicativo.
+ 
 
-## Learn More
+ 
+# Documentação da API
 
-To learn more about Next.js, take a look at the following resources:
+## User
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+#### Retorna um Token JWT
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+```http
+  POST /api/user/login
+```
 
-## Deploy on Vercel
+| Parâmetro   | Tipo       | Descrição                           |
+| :---------- | :--------- | :---------------------------------- |
+| `email` | `string` | **Obrigatório**. |
+| `senha` | `string` | **Obrigatório**.  |
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+#### Valide o Token JWT 
+
+```http
+  POST /api/user/login/validate-token
+```
+
+| Parâmetro   | Tipo       | Descrição                           |
+| :---------- | :--------- | :---------------------------------- |
+| `token` | `string` | **Obrigatório**. JWT token | 
+
+
+#### Cadastre usuário 
+```http
+  POST /api/user/
+```
+| Parâmetro   | Tipo       | Descrição                           |
+| :---------- | :--------- | :---------------------------------- |
+| `nome` | `string` | **Obrigatório**. Nome do Usuário |
+| `email` | `string` | **Obrigatório**. Email do Usuário |
+| `senha` | `string` | **Obrigatório**. Senha do Usuário |
+| `data_nascimento` | `string` | **Obrigatório**. Data de Nascimento do Usuário |
+
+
+#### Cadastrar um filme na lista de assistir do Usuário
+```http
+  POST /api/user/[email]/assistir
+```
+
+| Parâmetro   | Tipo       | Descrição                           |
+| :---------- | :--------- | :---------------------------------- |
+| `id_movie` | `string` | **Obrigatório**. id(tmdb) do filme |
+| `id_perfil` | `string` | **Obrigatório**. id do perfil |
+| `genres` | `string` | **Obrigatório**. gêneros do filme("#","#","#") |
+
+
+
+#### Obtenha todos os perfis do Usuário
+```http
+  GET /api/user/[email]/perfis
+```
+#### Cadastre um novo Perfil ao usuário
+```http
+  POST /api/user/[email]/perfis
+```
+| Parâmetro   | Tipo       | Descrição                           |
+| :---------- | :--------- | :---------------------------------- |
+| `nome` | `string` | **Obrigatório**. Nome do Perfil |
+
+#### Cadastre usuário por dados do Facebook
+```http
+  POST /api/user/cad_face/
+```
+| Parâmetro   | Tipo       | Descrição                           |
+| :---------- | :--------- | :---------------------------------- |
+| `nome` | `string` | **Obrigatório**. Nome do Facebook |
+| `email` | `string` | **Obrigatório**. Email do Facebook |
+
+---
+## Filmes
+#### Procure por Filmes com títulos originais traduzidos
+```http
+  GET /api/movies/
+```
+| Parâmetro   | Tipo       | Descrição                                   |
+| :---------- | :--------- | :------------------------------------------ |
+| `query`      | `string` | **Opcional**. query para o filtro |
+| `page`      | `string` | **Opcional**. página desejada |
+
+#### Obtenha todos os detalhes do filme pelo ID TMDB
+```http
+  GET /api/movies/[id_tmdb]
+```
+ 
+
+## Perfil
+
+#### Retorna Lista de Filmes para assistir mais tarde e ja assistidos
+```http
+  GET api/perfil/[id_perfil]/lista_assistir
+```
+
+#### Retorna dados de um filme adicionado para assistir mais tarde/assistido
+```http
+  GET api/perfil/[id_perfil]/lista_assistir/[id_movie]
+```
+
+#### Atualiza o status do filme do perfil para assistido
+```http
+  PUT api/perfil/[id_perfil]/lista_assistir/[id_movie]
+```
+
+#### Obtenha uma lista de filmes recomendados para o Perfil
+```http
+  PUT api/perfil/[id_perfil]/lista_assistir/[id_movie]
+```
+ 
+## Facebook Authentication
+
+ #### Lida com as autenticações do Facebook 
+```http
+  POST & GET api/auth/[...nextauth]
+```
+
+
+ ## Documentação de cores
+
+| Cor               | Hexadecimal                                                |
+| ----------------- | ---------------------------------------------------------------- |
+| Cor 1       | ![#1C8394](https://via.placeholder.com/10/1C8394?text=+) #1C8394 |
+| Cor 2       | ![#154B52](https://via.placeholder.com/10/154B52?text=+) #154B52 |
+| Cor 3       | ![#000B0D](https://via.placeholder.com/10/000B0D?text=+) #000B0D |
+| Cor 4       | ![#390D02](https://via.placeholder.com/10/390D02?text=+) #390D02 |
+| Cor Background       | ![#A52502](https://via.placeholder.com/10/A52502?text=+) #A52502 |
+ 
+ 
+ 
+
+
+## Stacks utilizada
+
+**Framework:** NextJs
+
+**Front-end:** React, TailwindCSS, CSS
+
+**Back-end:** Node, Cookies, Sessions, JWT Token, NextAuth, TheMovieDB API, Postgres Vercel
+
+Veja o Exemplo Hospedado:
+[Site](https://sertao-rush-kldexnywa-asatotexcos-projects.vercel.app/)

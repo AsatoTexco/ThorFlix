@@ -37,9 +37,7 @@ export async function POST(request) {
     //     },
     //     "status": true
     // }
-    // OBS: CODIFICADO
-
-
+    // OBS: CODIFICADO 
 
     return NextResponse.json({ token, status:true }, { status: 200 });
   } catch (error) {

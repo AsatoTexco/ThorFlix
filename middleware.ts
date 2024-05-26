@@ -1,18 +1,7 @@
 import { NextResponse } from 'next/server'
 import type { NextRequest } from 'next/server' 
 import {  decodeJwt } from 'jose';     
-import type { NextAuthOptions } from "next-auth"
-import { getServerSession } from "next-auth"
-import { withAuth } from "next-auth/middleware"
-import { decode } from 'next-auth/jwt';
-
- 
-
-
-
-
-
-
+     
 function getCookieValue(cookieString, cookieName) {
   // string de cookies para um array de cookies
   var cookies = cookieString.split(';');
@@ -31,14 +20,10 @@ function getCookieValue(cookieString, cookieName) {
   // se o cookie não for encontrado
   return null;
 }
-
-
-
-
+ 
 
 // MIDDLEWARE VALIDAR LOGIN  
 export async function middleware(request: NextRequest) {
-  
   
   const requestForNextAuth = {
     headers: {
@@ -62,11 +47,7 @@ export async function middleware(request: NextRequest) {
     }
 
   }
-
-
-
-
-  
+ 
 }
 
 // PATHS 

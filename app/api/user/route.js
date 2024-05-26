@@ -5,10 +5,8 @@ import { NextResponse } from 'next/server';
 export async function POST(request) {
   try { 
     const body = await request.json()
-    // # AQUI 
-    // essenciais: nome e email
+    
     const { nome,email,senha,data_nascimento } = body
-   
     
     const result = await sql.query(`SELECT * FROM usuarios WHERE email = $1 `,[email]);
 

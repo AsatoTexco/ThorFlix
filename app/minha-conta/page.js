@@ -63,7 +63,7 @@ function page() {
             <h1>{name }</h1>
             <h2>{email }</h2>
              {senha.length > 0 ? <h3>Senha: {senha}</h3> : <h3><FontAwesomeIcon icon="fa-brands fa-facebook" /> Facebook Auth</h3> }
-             {dataNascimento.length > 0 ? <h3>Nascimento: {dataNascimento}</h3> : ""}
+             {dataNascimento.length > 0 ? <h3>Nascimento: {dataNascimento.slice(0,10)}</h3> : ""}
             <button onClick={(e) => {
               if(session.data != null){
                 signOut() 

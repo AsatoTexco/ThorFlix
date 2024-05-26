@@ -39,6 +39,7 @@ function getCookieValue(cookieString, cookieName) {
 // MIDDLEWARE VALIDAR LOGIN  
 export async function middleware(request: NextRequest) {
   
+  console.log("tokenFacebook")
 
   const requestForNextAuth = {
     headers: {
@@ -46,7 +47,6 @@ export async function middleware(request: NextRequest) {
     },
   };  
   const tokenFacebook = getCookieValue(requestForNextAuth.headers.cookie,"next-auth.session-token")
-  console.log(tokenFacebook)
   if(tokenFacebook == null){
 
     var cookie_token = request.cookies.get("token") 

@@ -13,14 +13,15 @@ import { far } from '@fortawesome/free-regular-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import Cookies from 'js-cookie'
 import CardsPerfis from "../../components/cardsPerfis/CardsPerfis"
+import { useSession } from 'next-auth/react'
 
  
 function page() {
     // SE PA ESSA PAGINA TEM QUE RESETAR O COOKIE QUE DEFINE QUAL PERFIL VC ESTA UTILIZANDO
    
   Cookies.set("perfil","2")
-
-
+  const session = useSession()
+   
   return (
     <div className='bg-default'>
       <Menu/>

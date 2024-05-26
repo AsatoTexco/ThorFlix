@@ -1,14 +1,10 @@
+import { NextApiHandler } from "next";
 import NextAuth from "next-auth"; 
-import FacebookProvider from "next-auth/providers/facebook";
+import { NextApiRequest, NextApiResponse } from "next";
 import { authOptions } from '../../../../config/authOptions';
- 
-export const handler = NextAuth(authOptions);
- 
 
-export const GET = (req, res) => {
-  return handler(req, res);
-}
+const handler: NextApiHandler = async (req: NextApiRequest, res: NextApiResponse) => {
+  return NextAuth(req, res, authOptions);
+};
 
-export const POST = (req, res) => {
-  return handler(req, res);
-}
+export { handler as GET, handler as POST };

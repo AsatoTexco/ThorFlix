@@ -1,3 +1,8 @@
+![imagem site](https://iili.io/JLhI6F9.png)
+
+![imagem site](https://iili.io/JLhIPae.png)
+
+
 ## Requisitos
 
 - Node v18.17+
@@ -210,4 +215,4 @@ Obs: Se o Aplicativo do Facebook estiver em desenvolvimento, apenas será possí
 **Back-end:** Node, Cookies, Sessions, JWT Token, NextAuth, TheMovieDB API, Postgres Vercel
 
 Veja o Exemplo Hospedado:
-[Site](https://sertao-rush-kldexnywa-asatotexcos-projects.vercel.app/)
+[ThorFlix](https://thor-flix.vercel.app/)

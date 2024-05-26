@@ -1,0 +1,47 @@
+.card_filmeFy{
+    height: 220px;
+    width: 350px;
+    background-color: black;
+    overflow: hidden;
+    object-fit: cover;
+    position: relative;
+    cursor: pointer;
+    border-radius: 5px;
+
+}
+.img_card_filme{
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+}
+.overlay_card{
+
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    left: 0;
+    top: 0;
+    background-color: rgba(0, 0, 0, 0.301);
+    backdrop-filter: blur(10px);
+    opacity: 0;
+    transition: .2s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    color: white;
+}
+.card_filmeFy:hover .overlay_card{
+
+    opacity: 1;
+}
+
+.overlay_card .btn_seeMore{
+
+    padding: 5px 20px;
+    margin-top: 20px;
+    background-color: var(--red-1);
+    border-radius: 10px;
+
+
+}

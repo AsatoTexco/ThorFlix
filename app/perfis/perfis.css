@@ -1,0 +1,16 @@
+.perfis_page{
+    min-height: calc(100vh - 50px);
+    width: 100%;
+    display: flex; 
+    align-items: center;
+    color: white;
+    flex-direction: column;
+    
+}
+.title{
+    margin-top: 150px;
+    font-size: 35px;
+    text-align: center;
+}
+ 
+ 

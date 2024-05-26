@@ -1,0 +1,121 @@
+.card_perfil{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    cursor: pointer;
+    border-radius: 20px;
+    overflow: hidden;
+    font-size: 30px;
+    color: rgb(153, 153, 153);
+    background-color: rgb(  25, 25, 25);  
+    position: relative;
+}
+.card_perfil h1{
+    height: 40px;
+}
+.card_perfil img{
+    height: 260px;
+    width: 300px;
+    object-fit: cover;
+     
+}
+.hover_selection{
+    height: 100%;
+    width: 100%;
+    z-index: 2;
+    background-color: rgba(0, 0, 0, 0.301);
+    backdrop-filter: blur(10px);
+    top: 0;
+    position: absolute;
+    left: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 80px;
+    opacity: 0;
+    pointer-events: none;
+    transition: .5s;
+    color: white;
+}
+.card_perfil:hover .hover_selection{
+    opacity: 1;
+}
+.content_cards{
+    display: flex;
+    align-items: center;
+    justify-content: center;    
+    flex-wrap: wrap;
+    margin-top: 30px;
+    gap: 60px;
+}
+.card_add_perfil{
+    height: 300px;
+    width: 300px;
+    background-color: rgba(158, 158, 158, 0.116);
+    backdrop-filter: blur(20px);
+    border-radius: 20px;
+    font-size: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: .2s;
+}
+.card_add_perfil:hover{
+    background-color: rgba(116, 116, 116, 0.116);
+}
+.modal_cad_perfil{
+    position: fixed;
+    height: 100%;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.596);
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%,-50%);
+    z-index: 2;
+    display: flex;
+    align-items: center;   
+    justify-content: center; 
+}
+.content_modal_perfil{
+    height: 200px;
+    width: 100%;
+    max-width: 500px;
+    background-color: rgb(36, 36, 36);
+    position: relative;
+    border: 2px solid var(--dark);
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+.topo_modal{
+    position: absolute;
+    top: 0;
+    width: 100%;
+    left: 0;
+    display: flex;
+    align-items: center;
+    justify-content: end;
+    padding: 0px 15px;
+    font-size: 40px;
+}
+.input_nome{ 
+    width: 90%;
+    height: 40px;
+    border-radius: 10px;
+    padding: 5px;
+    margin-top: 40px;
+    color: black;
+}
+.input_sub_modal{
+    margin-top: 20px;
+    height: 40px;
+    width: 150px;
+    background-color: var(--blue-1);
+    border-radius: 10px;
+    cursor: pointer;
+    
+}

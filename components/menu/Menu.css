@@ -1,0 +1,68 @@
+.nav-bar{
+    width: 100%;
+    display: flex;
+    height: 50px;
+    position: sticky;
+    top: 0;
+    left: 0;
+    background-color: rgba(0, 0, 0, 0.342);
+    backdrop-filter: blur(10px);
+    justify-content: space-between;
+    align-items: center;
+    color: white;
+    padding: 0 20px;
+    z-index: 9999;
+}
+.area_img_menu{
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    overflow: hidden;
+    border: 2px solid var(--blue-1);
+    cursor: pointer;
+   
+}
+.area_href{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+}
+.area_href a{
+    color: rgb(167, 167, 167);
+}
+.area_href button{
+    color: rgb(167, 167, 167);
+}
+.area_href button:hover{
+
+    color: white;
+}
+.area_href a:hover{
+    color: white;
+}
+.area_perfil_rounded{
+    height: 45px;
+    position: relative;
+    width: 45px; 
+    
+    border-radius: 100%;
+    
+}
+ .area_perfil_rounded img{
+    width: 100%;
+ }
+ 
+ .listas_type{
+     
+    width: 150px;
+    background-color: rgba(0, 0, 0, 0.342);
+    backdrop-filter: blur(10px);
+    position: absolute;
+    top: 40px;
+    left: 82px; 
+    flex-direction: column; 
+    align-items: start;
+    display: flex;
+ }
+  

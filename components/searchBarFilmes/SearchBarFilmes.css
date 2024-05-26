@@ -1,0 +1,36 @@
+.area_bar_query{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+.bar_query{ 
+    height: 80px;
+    width: 100%;
+    max-width: 1200px;
+    border-radius: 10px;
+    background-color: rgba(65, 65, 65, 0.116);
+    margin-top: 200px;
+    overflow: hidden;
+}
+.input_query{
+    height: 100%;
+    width: 85%;
+    background-color: transparent;
+    outline: none;
+    font-size: 40px;
+    padding: 0px 20px;
+    color: white;
+}
+.btn_search_query{
+    width: 15%;
+    height: 100%;
+    outline: none;
+    position: relative;
+    top: -2px;
+    background-color: var(--blue-1);
+    text-align: center;
+    color: white;
+    font-size: 30px;
+}

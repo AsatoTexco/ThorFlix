@@ -1,0 +1,82 @@
+.para_assistir_page{
+    min-height: calc(100vh - 50px);
+    width: 100%;
+     
+}
+.content_para_assistir{ 
+    text-align: center;
+    color: white;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+.area_cards{
+    width: 100%;
+    max-width: 1200px;
+    display: flex;
+    align-items: center;
+    gap: 50px;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+.card_assistir{
+    height: 400px;
+    background-color: black;
+    border-radius: 20px;
+    width: 300px;
+    position: relative;
+    overflow: hidden;
+}
+.card_assistir img{
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+    opacity: 0.2;
+}
+.title_page{
+    margin-top: 100px;
+    font-size: 30px;
+    margin-bottom: 50px;
+}
+.overlay_card:hover img{
+    opacity: 1;
+} 
+.overlay_card{
+height: 100%;
+width: 100%; 
+display: flex;
+align-items: center;
+justify-content: center;
+flex-direction: column;
+position: absolute;
+gap: 20px;
+opacity: 0;
+top: 0;
+left: 0;
+transition: .2s;
+}
+.overlay_card:hover{
+    opacity: 1;
+}
+.overlay_card button{
+    height: 40px;
+    padding: 0 10px;
+    background-color: var(--blue-2);
+    border-radius: 8px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.overlay_card a{
+    height: 40px;
+    padding: 0 10px;
+    background-color: var(--blue-2);
+    border-radius: 8px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}

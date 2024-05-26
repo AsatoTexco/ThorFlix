@@ -1,0 +1,78 @@
+.about_filme_page{
+    min-height: calc(100vh - 50px);
+    width: 100%;
+     
+} 
+
+.content_filme_about{
+    width: 100%;
+    color: white;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+.img_background{
+
+    width: 100%;
+    height: 40vh;
+    object-fit: cover;
+    opacity: 0.5; 
+
+}
+.img_icon_logo{
+    height: 200px;
+    width: 200px;
+    object-fit: cover;
+    border-radius: 100%;
+    position: relative;
+    top: -100px;
+}
+.about_session{
+    width: 100%;
+    position: relative;
+    top: -90px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+.title_movie{
+    font-size: 35px; 
+}
+ 
+.sobre_movie{
+    font-size: 24px;
+    color: rgb(185, 185, 185);
+    width: 100%;
+    max-width: 1200px;
+}
+.genres{
+    display: flex;
+    gap: 10px;
+    margin-top: 10px;
+}
+.genres p {
+    height: 30px;
+    background-color: var(--blue-2);
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 10px;
+
+}
+
+.btn_mc_assistir{
+    height: 40px;
+    width: 200px;
+    background-color: var(--red-2);
+    margin-top: 20px;
+    border-radius: 5px;
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    justify-content: center;
+
+}

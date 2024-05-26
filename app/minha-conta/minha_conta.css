@@ -1,0 +1,60 @@
+.minha_conta{
+    min-height: calc(100vh - 50px);
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+
+.area_about{
+    height: 500px;
+    width: 400px;
+    border-radius: 10px;
+    background-color: rgba(255, 255, 255, 0.055);
+    backdrop-filter: blur(2px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    position: relative;
+}
+.area_img{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100px;
+    width: 100px;
+    background-color: blue;
+    border-radius: 100%;
+    overflow: hidden;
+}
+.img_profile{
+    height: 100%;
+    width: 100%;
+
+}
+.area_about h1{
+    color: white;
+    margin-top: 20px;
+    font-size: 24px;
+}
+.area_about h2{
+    color: rgb(175, 174, 174);
+}
+.area_about h3{
+    color: rgb(175, 174, 174);
+}
+.btn_sair_about{
+    height: 40px;
+    width: 150px;
+    border: 2px solid var(--red-1);
+    border-radius: 8px;
+    position: absolute;
+    bottom: 15px;
+    color: var(--red-1);
+    transition: .2s;
+}
+.btn_sair_about:hover{
+    background-color: var(--red-2);
+}

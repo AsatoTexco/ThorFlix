@@ -33,24 +33,25 @@ function page() {
   useEffect(() => {
 
     const handleValidLogin = async () => {
-      if(session.status == "authenticated"){  
-        let email = session.data.user.email
-        let nome = session.data.user.name
-        let req = await fetch("/api/user/cad_face",{
-          method:"POST",
-          body:JSON.stringify({email:email,nome:nome})
-        })
-        let res = await req.json()
+      console.log(session)
+      // if(session.status == "authenticated"){  
+      //   let email = session.data.user.email
+      //   let nome = session.data.user.name
+      //   let req = await fetch("/api/user/cad_face",{
+      //     method:"POST",
+      //     body:JSON.stringify({email:email,nome:nome})
+      //   })
+      //   let res = await req.json()
          
-        if(res.status){
-          router.push("/perfis")  
-        }else{
-          signOut()
-          setLoad(false)
-        }
-      } else{
-        setLoad(false)
-      } 
+      //   if(res.status){
+      //     router.push("/perfis")  
+      //   }else{
+      //     signOut()
+      //     setLoad(false)
+      //   }
+      // } else{
+      //   setLoad(false)
+      // } 
     }
     handleValidLogin()
 

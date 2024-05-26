@@ -6,18 +6,19 @@ import {  decodeJwt } from 'jose';
 // MIDDLEWARE VALIDAR LOGIN  
 export async function middleware(request: NextRequest) {
   
-  var cookie_token = request.cookies.get("token") 
-  var token = ''   
+  console.log("2")
+  // var cookie_token = request.cookies.get("token") 
+  // var token = ''   
 
-  if(typeof cookie_token != "undefined"){
-    token = cookie_token.value 
-    if(!decodeJwt(token)['id']){
-      return NextResponse.redirect(new URL('/login', request.url)); 
-    } 
-    // LOGADO 
-  } else{
-    return NextResponse.redirect(new URL('/login', request.url)); 
-  }
+  // if(typeof cookie_token != "undefined"){
+  //   token = cookie_token.value 
+  //   if(!decodeJwt(token)['id']){
+  //     return NextResponse.redirect(new URL('/login', request.url)); 
+  //   } 
+  //   // LOGADO 
+  // } else{
+  //   return NextResponse.redirect(new URL('/login', request.url)); 
+  // }
 }
 
 // PATHS 

@@ -45,8 +45,8 @@ export async function middleware(request: NextRequest) {
       cookie: request.headers.get('cookie'),
     },
   };  
-  console.log(requestForNextAuth)
-  const tokenFacebook = getCookieValue(requestForNextAuth.headers.cookie,"next-auth.session-token")
+  let cookiesSt = getCookieValue(requestForNextAuth.headers.cookie,"next-auth.session-token") 
+  const tokenFacebook = cookiesSt == null ? getCookieValue(requestForNextAuth.headers.cookie,"__Secure-next-auth.session-token") : cookiesSt
   if(tokenFacebook == null){
 
     var cookie_token = request.cookies.get("token") 

@@ -33,7 +33,6 @@ function page() {
   useEffect(() => {
 
     const handleValidLogin = async () => {
-      console.log(session)
       if(session.status == "authenticated"){  
         let email = session.data.user.email
         let nome = session.data.user.name

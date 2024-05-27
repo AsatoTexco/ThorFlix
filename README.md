@@ -191,6 +191,40 @@ Obs: Se o Aplicativo do Facebook estiver em desenvolvimento, apenas será possí
   POST & GET api/auth/[...nextauth]
 ```
 
+# Banco de Dados
+
+## Tabela Usuários
+```sql
+CREATE TABLE usuarios (
+    id SERIAL PRIMARY KEY,
+    nome varchar(255) NOT NULL,
+    email varchar(255) NOT NULL,
+    senha varchar(255),
+    data_nascimento varchar(255)
+);
+```
+## Tabela Perfis
+```sql
+CREATE TABLE perfis(
+    id SERIAL PRIMARY KEY,
+    nome varchar(255), 
+    id_usuario INTEGER NOT NULL,
+    image VARCHAR(255) ,
+    FOREIGN KEY (id_usuario) REFERENCES usuarios(id)
+); 
+```
+## Tabela Lista_assistir
+```sql
+CREATE TABLE lista_assistir (
+    id SERIAL PRIMARY KEY,
+    id_perfil INTEGER NOT NULL,
+    id_movie INTEGER NOT NULL,
+    genres VARCHAR(255) NOT NULL,
+    FOREIGN KEY (id_perfil) REFERENCES perfis(id)
+); 
+```
+
+
 
  ## Documentação de cores
 

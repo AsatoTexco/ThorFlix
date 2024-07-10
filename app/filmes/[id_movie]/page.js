@@ -1,7 +1,7 @@
 'use client'
 import { signOut, useSession } from 'next-auth/react'
 import { useRouter } from 'next/navigation'
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import Cookies from 'js-cookie';
 import Menu from "../../../components/menu/Menu"
 import './about_filme.css' 
@@ -12,12 +12,16 @@ import { fab } from '@fortawesome/free-brands-svg-icons'
 import { fas } from '@fortawesome/free-solid-svg-icons'
 import { far } from '@fortawesome/free-regular-svg-icons' 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import CardFilmeHome from '../../../components/cardFilmeHome/CardFilmeHome';
 
 
 function page({params}) {
 
   const [load, setLoad] = useState(false)
+  const [trailer, setTrailer] = useState('')
   const [assistirDps, setAssistirDps] = useState(false)
+  const [similar, setSimilar] = useState(false)
+  
 
   const router = useRouter() 
   const session = useSession()
@@ -54,17 +58,21 @@ function page({params}) {
     }
 
   }
-  useEffect(() => {
+  useEffect(() => { 
+ 
+
     
+
     const handleFetchData = async () => {
 
         let req = await fetch("/api/movies/"+id_movie)
         let res = await req.json()
         if(res.status){
-             
+            console.log(res)
             setLoad(res.result) 
+            setTrailer(res.trailer)
         }
-        // setLoad(true)
+         
     }
     
     const handleFetchDataPerfil = async () => {
@@ -80,12 +88,20 @@ function page({params}) {
         let res = await req.json() 
         if(res.status){
             setAssistirDps(true)    
-        }
-        
-
+        } 
     }
+    const handleFetchSimilar = async () => {
+ 
+        let req = await fetch("/api/movies/"+id_movie+"/similar")
+        let res = await req.json() 
+        if(res.status){ 
+            setSimilar(res.result.results) 
+        } 
+    }
+
     handleFetchDataPerfil()
     handleFetchData()
+    handleFetchSimilar()
      
   },[])
 
@@ -127,26 +143,104 @@ function page({params}) {
                 
                 <button className='btn_mc_assistir' disabled={assistirDps} onClick={(e)=> { 
                     setAssistirDps(true)
-                    // 12,878,28
                     var listaGenres = ((load.genres).map(e => {return e.id})).join(",")
                    
-                    var id_movie = load.id
-                    
+                    var id_movie = load.id 
                     handleSalvarAssistir(listaGenres,id_movie)
- 
-                    // setAssistirDps(true)
-                }}  > Assistir mais Tarde <FontAwesomeIcon icon="fa-solid fa-plus"/></button>
+  
+                }}> Assistir mais Tarde <FontAwesomeIcon icon="fa-solid fa-plus"/></button>
 
                 }
-                {/* <button className='btn_mc_assistir' disabled={assistirDps}> <FontAwesomeIcon icon="fa-solid fa-plus"/>Para assistir</button> */}
+                
 
              </div>
+           
+            <iframe className='trailerYT' src={"https://www.youtube.com/embed/"+trailer} title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+             
+            
+            <h1 className='txt_similar'>Você também pode gostar...  </h1>
+             <CustomCarousel>
+                {similar && similar.map((e, index) => ( 
+                    <CardFilmeHome data_filme={e} key={index} /> 
+                ))}
+            </CustomCarousel>
+                    
+            
 
+
+            
         </div>
       </div>
     </div>
   )
+}		 
+
+function Box({ index }) {
+    return <div className="box">Box {index}</div>;
 }
+
+
+function CustomCarousel(props) {
+    const slider = useRef(null);
+    let isDown = useRef(false);
+    let startX = useRef(null);
+    let scrollLeft = useRef(null);
+  
+    useEffect(() => {
+         
+      if (slider && slider.current) {
+        let sliderRef = slider.current;
+        sliderRef.addEventListener("mousedown", one);
+        sliderRef.addEventListener("mousedown", two);
+        sliderRef.addEventListener("mouseleave", three);
+        sliderRef.addEventListener("mouseup", four);
+        sliderRef.addEventListener("mousemove", five);
+  
+        return () => {
+          sliderRef.removeEventListener("mousedown", one);
+          sliderRef.removeEventListener("mousedown", two);
+          sliderRef.removeEventListener("mouseleave", three);
+          sliderRef.removeEventListener("mouseup", four);
+          sliderRef.removeEventListener("mousemove", five);
+        };
+      }
+    }, []);
+  
+    function one(e) { 
+      isDown.current = true;
+      startX.current = e.pageX - slider.current.offsetLeft;
+      scrollLeft.current = slider.current.scrollLeft;
+    }
+  
+    function two(e) {
+      isDown.current = true;
+      startX.current = e.pageX - slider.current.offsetLeft;
+      scrollLeft.current = slider.current.scrollLeft;
+    }
+  
+    function three() {
+      isDown.current = false;
+    }
+  
+    function four() {
+      isDown.current = false;
+    }
+  
+    function five(e) {
+      if (!isDown.current) return;
+      e.preventDefault();
+      const x = e.pageX - slider.current.offsetLeft;
+      const walk = x - startX.current;
+      slider.current.scrollLeft = scrollLeft.current - walk;
+    }
+  
+    return (
+      <div className="items" ref={slider}>
+        {props.children}
+      </div>
+    );
+  }
+
 
 export default page
 library.add(far,fas,fab)

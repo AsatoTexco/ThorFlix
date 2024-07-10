@@ -23,6 +23,7 @@ function page() {
   const [email,setEmail] = useState("")
   const [senha,setSenha] = useState("")
   const [dataNascimento,setDataNascimento] = useState("")
+  const [facebookAuth, setFace] = useState(true)
    
   var userData = {} 
   useEffect(() => {
@@ -37,14 +38,15 @@ function page() {
 
       setName(userData.nome)
       setEmail(userData.email)
-      setDataNascimento(userData.data_nascimento)
-      setSenha(userData.senha) 
+      // setDataNascimento(userData.data_nascimento)
+      // setSenha(userData.senha) 
  
     }else{  
       userData = session.data.user
       setName(userData.name)
       setEmail(userData.email)
       setImg(userData.image)
+      setFace(false)
       
     }
 
@@ -62,10 +64,9 @@ function page() {
             </div>
             <h1>{name }</h1>
             <h2>{email }</h2>
-             {senha.length > 0 ? <h3>Senha: {senha}</h3> : <h3><FontAwesomeIcon icon="fa-brands fa-facebook" /> Facebook Auth</h3> }
-             {dataNascimento.length > 0 ? <h3>Nascimento: {dataNascimento.slice(0,10)}</h3> : ""}
+             { !facebookAuth && <h3><FontAwesomeIcon icon="fa-brands fa-facebook" /> Facebook Auth</h3> } 
             <button onClick={(e) => {
-              if(session.data != null){
+              if(session.data != null){   
                 signOut() 
               }
               router.push("/login") 

@@ -4,17 +4,20 @@ import {  decodeJwt } from 'jose';
      
 function getCookieValue(cookieString, cookieName) {
   // string de cookies para um array de cookies
-  var cookies = cookieString.split(';');
 
-
-  for(var i = 0; i < cookies.length; i++) {
-      var cookie = cookies[i].trim();
-
-      // se o cookie começa com o nome do cookie desejado
-      if(cookie.indexOf(cookieName + '=') === 0) {
-          // Retorna o valor do cookie
-          return cookie.substring(cookieName.length + 1);
-      }
+  if(cookieString != null){
+    var cookies = cookieString.split(';');
+  
+  
+    for(var i = 0; i < cookies.length; i++) {
+        var cookie = cookies[i].trim();
+  
+        // se o cookie começa com o nome do cookie desejado
+        if(cookie.indexOf(cookieName + '=') === 0) {
+            // Retorna o valor do cookie
+            return cookie.substring(cookieName.length + 1);
+        }
+    } 
   }
 
   // se o cookie não for encontrado

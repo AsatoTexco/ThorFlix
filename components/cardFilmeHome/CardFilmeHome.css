@@ -9,6 +9,9 @@
     border-radius: 5px;
 
 }
+.title_filme_card{
+    text-align: center;
+}
 .img_card_filme{
     height: 100%;
     width: 100%;

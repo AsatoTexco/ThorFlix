@@ -43,6 +43,7 @@
 }
  
 .sobre_movie{
+    transition: .2s;
     font-size: 24px;
     color: rgb(185, 185, 185);
     width: 100%;
@@ -52,6 +53,10 @@
     display: flex;
     gap: 10px;
     margin-top: 10px;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
 }
 .genres p {
     height: 30px;
@@ -75,4 +80,60 @@
     align-items: center;
     justify-content: center;
 
+}
+
+.txt_similar{
+    width: 90%;
+    font-size: 22px;
+    text-align: start;
+}
+.box {
+    box-sizing: border-box;
+    width: 200px;
+    height: 200px; 
+    background-color: blueviolet;
+    border: 1px solid rgb(0, 0, 0);
+  }
+  
+  .items {
+    margin-top: 20px;
+    margin-bottom: 50px;
+    position: relative;
+    width: 90%;
+    gap: 20px;
+    overflow-x: scroll;
+    overflow-y: hidden;
+    white-space: nowrap;
+    transition: all 0.2s; 
+    will-change: transform;
+    user-select: none;
+    cursor: pointer;
+    padding: 0;
+    overflow-x: scroll;
+    overflow-y: hidden;
+    display: grid;
+    grid-auto-flow: column;
+  }
+  
+  .items {
+    -ms-overflow-style: none; /* Internet Explorer 10+ */
+    scrollbar-width: none; /* Firefox */
+  }
+  .items::-webkit-scrollbar {
+    display: none; /* Safari and Chrome */
+  }
+  
+.trailerYT{
+
+    width: 100%;
+    max-width: 800px;
+    height: 400px;
+
+}
+@media (max-width: 800px) {
+
+    .sobre_movie{
+        font-size: 18px;
+    }
+    
 }

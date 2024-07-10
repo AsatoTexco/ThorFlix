@@ -87,8 +87,8 @@ function page() {
       <form action={handleSubmit} className='card_login'>
         <h1>Login</h1>
         <div className='area_inputs'>
-            <input type='email' value={email} onChange={(e) => {setEmail(e.target.value)}} placeholder='E-Mail' className='input_txt'/> 
-            <input type='password' value={password} onChange={(e) => {setPassword(e.target.value)}} placeholder='Password' className='input_txt'/> 
+            <input type='email' value={email} onChange={(e) => {setEmail(e.target.value)}} placeholder='E-Mail' className='input_txt' id='email_input'/> 
+            <input type='password' value={password} onChange={(e) => {setPassword(e.target.value)}} placeholder='Password' className='input_txt' id='pass_input'/> 
         </div> 
         <div className='area_btns'>
           <button type='reset' className='btn_login_facebook' onClick={handleFacebookLogin}><FontAwesomeIcon icon="fa-brands fa-facebook" /></button>

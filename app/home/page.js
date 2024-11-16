@@ -17,7 +17,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 
 
-function page() {
+function Page() {
 
   const router = useRouter() 
   const session = useSession()
@@ -60,5 +60,5 @@ function page() {
   )
 }
 
-export default page
+export default Page
 library.add(far,fab,fas)

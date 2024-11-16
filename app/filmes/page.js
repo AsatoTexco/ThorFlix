@@ -4,7 +4,7 @@ import './filmes.css'
 import SearchBarFilmes from "../../components/searchBarFilmes/SearchBarFilmes"
 import FilmesFilter from "../../components/filmes_filter/FilmesFilter"
 
-function page() {
+function Page() {
 
    
    
@@ -22,4 +22,4 @@ function page() {
   )
 }
 
-export default page
+export default Page

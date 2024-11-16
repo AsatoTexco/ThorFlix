@@ -13,9 +13,9 @@ import { fas } from '@fortawesome/free-solid-svg-icons'
 import { far } from '@fortawesome/free-regular-svg-icons' 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import CardFilmeHome from '../../../components/cardFilmeHome/CardFilmeHome';
+import StarsIndicacao from '../../../components/starsIndicacao/StarsIndicacao'
 
-
-function page({params}) {
+function Page({params}) {
 
   const [load, setLoad] = useState(false)
   const [trailer, setTrailer] = useState('')
@@ -58,21 +58,16 @@ function page({params}) {
     }
 
   }
-  useEffect(() => { 
- 
-
-    
+  useEffect(() => {  
 
     const handleFetchData = async () => {
 
         let req = await fetch("/api/movies/"+id_movie)
         let res = await req.json()
-        if(res.status){
-            console.log(res)
-            setLoad(res.result) 
-            setTrailer(res.trailer)
-        }
-         
+        if(res.status){ 
+          setLoad(res.result) 
+          setTrailer(res.trailer) 
+        } 
     }
     
     const handleFetchDataPerfil = async () => {
@@ -126,8 +121,15 @@ function page({params}) {
             <img className='img_icon_logo' src={"https://image.tmdb.org/t/p/original"+( load.backdrop_path == null ? load.belongs_to_collection == null ? load.backdrop_path :  load.belongs_to_collection.backdrop_path == null ? load.backdrop_path : load.belongs_to_collection.backdrop_path : load.backdrop_path )}/>
 
             <div className='about_session'>
+
+
                 <h1 className='title_movie'>{load.title}</h1>
-                    <h2 className='sobre_movie'>{load.overview}</h2>
+                <p className='dataMovie'>{load.release_date.slice(0,4)}</p>
+
+                <StarsIndicacao numStars={load.vote_average} />
+                
+
+                <h2 className='sobre_movie'>{load.overview}</h2>
                  
                 <div className='genres'>
                     {load.genres && load.genres.map((e,index) => (
@@ -135,12 +137,13 @@ function page({params}) {
                         <p key={index}>{e.name}</p> 
                     ))} 
                 </div>
+
                 {assistirDps && assistirDps == true ? 
                 
                 <button className='btn_mc_assistir' disabled={assistirDps}>Já Adicionado <FontAwesomeIcon icon="fa-solid fa-check" /></button>
                 
-                :
-                
+                : 
+
                 <button className='btn_mc_assistir' disabled={assistirDps} onClick={(e)=> { 
                     setAssistirDps(true)
                     var listaGenres = ((load.genres).map(e => {return e.id})).join(",")
@@ -242,5 +245,5 @@ function CustomCarousel(props) {
   }
 
 
-export default page
+export default Page
 library.add(far,fas,fab)

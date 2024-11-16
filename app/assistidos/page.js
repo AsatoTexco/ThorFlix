@@ -5,7 +5,7 @@ import Menu from "../../components/menu/Menu"
 import './assistidos.css'
 import Link from 'next/link';
 
-function page() {
+function Page() {
  
   var id_perfil 
   const [data, setData] = useState(false)
@@ -94,4 +94,4 @@ function page() {
   )
 }
 
-export default page
+export default Page

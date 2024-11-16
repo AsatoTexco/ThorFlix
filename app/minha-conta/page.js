@@ -13,7 +13,7 @@ import { far } from '@fortawesome/free-regular-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 
-function page() {
+function Page() {
 
   const session = useSession()
   const router = useRouter()
@@ -30,7 +30,7 @@ function page() {
 
     if(session.data == null){
         if(typeof Cookies.get("token") == "undefined"){
-          useRouter("/login")
+          router.push("/login")
         }
 
       let token = Cookies.get("token")
@@ -78,5 +78,5 @@ function page() {
   )
 }
 
-export default page
+export default Page
 library.add(fab,far,fas)

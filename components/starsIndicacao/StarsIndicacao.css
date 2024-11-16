@@ -1,0 +1,13 @@
+.areaStars{
+
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    justify-content: center;
+    padding: 10px
+}
+.areaStars label{
+
+    font-size: 18px;
+
+}

@@ -8,7 +8,7 @@ import './para_assistir.css'
 import {decodeJwt} from 'jose';
 import Link from 'next/link';
 
-function page() {
+function Page() {
 
   const router = useRouter() 
   const session = useSession()
@@ -123,4 +123,4 @@ function page() {
   )
 }
 
-export default page
+export default Page

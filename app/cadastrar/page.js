@@ -18,7 +18,7 @@ import Link from 'next/link'
 
 
 
-function page() {
+function Page() {
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -123,5 +123,5 @@ function page() {
   )
 }
 
-export default page
+export default Page
 library.add(far,fas,fab)

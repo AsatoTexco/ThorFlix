@@ -16,7 +16,7 @@ import CardsPerfis from "../../components/cardsPerfis/CardsPerfis"
 import { useSession } from 'next-auth/react'
 
  
-function page() {
+function Page() {
     // SE PA ESSA PAGINA TEM QUE RESETAR O COOKIE QUE DEFINE QUAL PERFIL VC ESTA UTILIZANDO
    
   Cookies.set("perfil","2")
@@ -33,5 +33,5 @@ function page() {
   )
 }
  
-export default page
+export default Page
 library.add(fab,far,fas)

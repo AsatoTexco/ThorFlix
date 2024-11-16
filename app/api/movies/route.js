@@ -28,8 +28,7 @@ export async function GET(request,{params}) {
         }
     });
 
-    let res = await req.json()
-
+    let res = await req.json() 
       
       return NextResponse.json({ status:true, result:res }, { status: 200 });
   } catch (error) {

@@ -10,6 +10,10 @@
 
 }
 .title_filme_card{
+        max-width: 350px;
+    overflow: hidden;        /* Esconde o conteúdo que ultrapassar o limite */
+    text-overflow: ellipsis; /* Adiciona '...' no final do texto, se necessário */
+    white-space: nowrap;
     text-align: center;
 }
 .img_card_filme{

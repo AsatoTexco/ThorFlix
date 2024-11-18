@@ -23,7 +23,7 @@ function StarsIndicacao(props) {
   }
 
   const avaliacao = Math.round( (props.numStars / 2) * 10) / 10 ;
-  const qntStar = parseInt(String(props.numStars / 2).charAt(0))
+  const qntStar = parseInt(String(avaliacao).charAt(0))
   
 
   if(props.numStars < 1){

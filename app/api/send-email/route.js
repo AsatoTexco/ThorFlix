@@ -9,7 +9,7 @@ export async function POST(request) {
     const body = await request.json();
     const { to, subject, html } = body; 
  
-    const transporter = nodemailer.createTransport({
+    const transporter = await nodemailer.createTransport({
         host:  process.env.GMAIL_HOST , // Servidor SMTP
         port:  process.env.GMAIL_PORT , // Porta
         secure: false, // Use 'true' para SSL

@@ -99,7 +99,7 @@ const ConfirmarEmailLink = `
 
   <!-- start preheader -->
   <div class="preheader" style="display: none; max-width: 0; max-height: 0; overflow: hidden; font-size: 1px; line-height: 1px; color: #fff; opacity: 0;">
-    A preheader is the short summary text that follows the subject line when an email is viewed in the inbox.
+    Verificação de e-mail de nova conta ThorFlix - Para continuar com o cadastro no ThorFlix, verifique o endereço de e-mail pelo link abaixo
   </div>
   <!-- end preheader -->
 

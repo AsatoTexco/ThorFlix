@@ -1,0 +1,115 @@
+@keyframes loadingBars { 
+    0% {
+        transform: scaleX(1) scaleY(0.6);
+    }
+    30% {
+        transform: scaleX(1) scaleY(1);
+    }
+    55% {
+        transform: scaleX(1) scaleY(0.6);
+    }
+    100% {
+        transform: scaleX(1) scaleY(0.6);
+    }
+}
+
+.backgroundCloseModal{
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.911);
+    position: absolute;
+}
+.areaModalConfirmarEmail{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    width: 100%;
+    position: fixed;
+}
+.modalConfirmarEmail{
+
+    width: 95%; 
+    padding: 5px;
+    background-color: rgba(54, 54, 54, 0.815);
+    border-radius: 10px  ;
+    position: fixed; 
+    max-width: 800px;
+
+
+}
+.headConfModalM{
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+    color: rgb(255, 255, 255);
+    border-bottom: 2px solid rgb(182, 182, 182);
+    font-size: 22px;
+
+}
+.headConfModalM h2{
+    width: 97%;
+}
+
+.areaLoadingAbout{
+   
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 20px; 
+    margin-bottom: 20px; 
+}
+.contentAreaLoadingEmail{
+
+    width: 95%;
+    min-height: 100px;
+    padding: 10px;
+    background-color: rgb(36, 36, 36);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+
+}
+.contentAreaLoadingEmail p{
+    text-align: center;
+    color: rgb(255, 255, 255);
+}
+.contentAreaLoadingEmail p strong{
+    color: var(--blue-1);
+}
+
+.loadingContentEmail{
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    padding: 20px;
+
+}
+.loadingContentEmail h2{
+
+    color: var(--blue-light);
+    font-size: 20px;
+
+}
+.areaBars{
+    display: flex; 
+    gap: 5px;
+}
+.bar{
+    height: 50px;
+    width: 6px;
+    background-image: linear-gradient(45deg, var(--blue-1),var(--blue-light));
+    
+    animation: loadingBars 1s ease-in-out infinite;
+}
+.bar2{
+    animation-delay: .15s;
+}
+.bar3{
+    animation-delay: .30s;
+}

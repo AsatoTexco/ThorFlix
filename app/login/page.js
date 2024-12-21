@@ -33,9 +33,10 @@ function Page() {
   useEffect(() => {
 
     const handleValidLogin = async () => {
-      if(session.status == "authenticated"){  
-        let email = session.data.user.email
-        let nome = session.data.user.name
+      const s = session
+      if(s.status == "authenticated"){  
+        let email = s.data.user.email
+        let nome = s.data.user.name
         let req = await fetch("/api/user/cad_face",{
           method:"POST",
           body:JSON.stringify({email:email,nome:nome})
@@ -54,21 +55,23 @@ function Page() {
     }
     handleValidLogin()
 
-  },[router])
+  },[router,session])
    
   const handleFacebookLogin = async (event) => {  
     await signIn('facebook')   
   } 
  
   const handleSubmit = async (event) => {  
+     
     let req = await fetch("/api/user/login",{
       method:"POST",
       body:JSON.stringify({
-        email:email,senha:password
+        email:email,password:password
       })
     })
     let res = await req.json()  
  
+    
     if(res.status){
       Cookies.set("token",res.token) 
       router.push("/perfis")

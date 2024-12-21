@@ -11,6 +11,7 @@ import { fas } from '@fortawesome/free-solid-svg-icons'
 import { far } from '@fortawesome/free-regular-svg-icons' 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { useRouter } from 'next/navigation'
+import Image from 'next/image'
 
 
 function CardsPerfis() {
@@ -24,11 +25,12 @@ function CardsPerfis() {
   
     useEffect(() => {
   
+        const s = session
         var emailV = ""
-        if(session.data == null){ 
+        if(s.data == null){ 
             emailV = decodeJwt(Cookies.get("token")).email  
         }else{ 
-            emailV = session.data.user.email
+            emailV = s.data.user.email
         }
         
         
@@ -48,7 +50,7 @@ function CardsPerfis() {
         }
          
 
-    },[])
+    },[session])
 
     const handleSetPerfilCookie = (perfilJson) => { 
         Cookies.set("perfil",perfilJson) 
@@ -118,7 +120,7 @@ if(!data){
         <div key={e.id} className='card_perfil' onClick={() => { 
             handleSetPerfilCookie(JSON.stringify(e))
         }}>
-            <img src={e.image}/>
+            <Image alt='imagem representativa' width={400} height={400} src={e.image}/>
             <h1>{e.nome}</h1> 
             <div className='hover_selection'>
                 <FontAwesomeIcon icon="fa-solid fa-chevron-right" />

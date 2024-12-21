@@ -15,7 +15,7 @@ export async function POST(request) {
     await sql.query('BEGIN');
 
     // Verificar se o usuário já existe
-    const result = await sql.query(`SELECT * FROM usuarios WHERE email = $1`, [email]);
+    const result = await sql.query(`SELECT * FROM users WHERE email = $1`, [email]);
     if (result.rowCount > 0) {
       await sql.query('COMMIT');
       return NextResponse.json({ status: true, result: "nao cad" }, { status: 200 });
@@ -23,7 +23,7 @@ export async function POST(request) {
       try {
         // Inserir um novo usuário
         const req = await sql.query(
-          `INSERT INTO usuarios (nome, email) VALUES ($1, $2) RETURNING *`,
+          `INSERT INTO users (nome, email) VALUES ($1, $2) RETURNING *`,
           [nome, email]
         );
         const imgs = ["https://images.pexels.com/photos/5023686/pexels-photo-5023686.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",

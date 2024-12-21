@@ -5,6 +5,7 @@ import Link from 'next/link'
 import { signOut, useSession } from 'next-auth/react'
 import { useRouter } from 'next/navigation'
 import SubMenu from '../subMenu/SubMenu'
+import Image from 'next/image'
 function Menu() {
 
     const session = useSession()
@@ -36,7 +37,7 @@ function Menu() {
         <div className='area_perfil_rounded'  >
             <SubMenu visible={subMenuVisible} />
             <div className='area_img_menu'> 
-                <img onClick={(e) => {
+                <Image width={512} height={512} alt='imagem representativa' onClick={(e) => {
                     setSubMenuVisible(!subMenuVisible)
                 }} src={ session.data!=null ? session.data.user.image : "https://static-00.iconduck.com/assets.00/thor-hammer-icon-512x512-m5xfr3pr.png" }/>
             </div>

@@ -11,6 +11,7 @@ import { fab } from '@fortawesome/free-brands-svg-icons'
 import { fas } from '@fortawesome/free-solid-svg-icons'
 import { far } from '@fortawesome/free-regular-svg-icons' 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import Image from 'next/image'
 
 
 function Page() {
@@ -20,37 +21,31 @@ function Page() {
 
   const [name,setName] = useState("")
   const [img,setImg] = useState("")
-  const [email,setEmail] = useState("")
-  const [senha,setSenha] = useState("")
-  const [dataNascimento,setDataNascimento] = useState("")
+  const [email,setEmail] = useState("") 
+  
   const [facebookAuth, setFace] = useState(true)
-   
-  var userData = {} 
-  useEffect(() => {
-
-    if(session.data == null){
+    
+  useEffect(() => { 
+    if(session.data == null){ 
         if(typeof Cookies.get("token") == "undefined"){
           router.push("/login")
         }
 
       let token = Cookies.get("token")
-      userData = decodeJwt(token)
-
-      setName(userData.nome)
-      setEmail(userData.email)
-      // setDataNascimento(userData.data_nascimento)
-      // setSenha(userData.senha) 
+      const dataDecode = decodeJwt(token) 
+      setName(dataDecode.name)
+      setEmail(dataDecode.email) 
  
-    }else{  
-      userData = session.data.user
-      setName(userData.name)
-      setEmail(userData.email)
-      setImg(userData.image)
+    }else{   
+      const dataDecode = session.data.user 
+      setName(dataDecode.name)
+      setEmail(dataDecode.email)
+      setImg(dataDecode.image)
       setFace(false)
       
     }
 
-  },[session])
+  },[session,router])
 
 
   return (
@@ -60,9 +55,9 @@ function Page() {
 
         <div className='area_about'>
             <div className='area_img'>
-                <img className='img_profile' src={ session.data!=null ? session.data.user.image : "https://static-00.iconduck.com/assets.00/thor-hammer-icon-512x512-m5xfr3pr.png" } />
+                <Image alt='imagem representativa' height={200} width={200} className='img_profile' src={ session.data!=null ? session.data.user.image : "https://static-00.iconduck.com/assets.00/thor-hammer-icon-512x512-m5xfr3pr.png" } />
             </div>
-            <h1>{name }</h1>
+            <h1>{name}</h1>
             <h2>{email }</h2>
              { !facebookAuth && <h3><FontAwesomeIcon icon="fa-brands fa-facebook" /> Facebook Auth</h3> } 
             <button onClick={(e) => {

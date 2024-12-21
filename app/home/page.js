@@ -46,7 +46,7 @@ function Page() {
       }
     }
     handleFetchDataFy()
-  },[])
+  },[router])
   return (
     <div className='bg-default'> 
       <Menu />

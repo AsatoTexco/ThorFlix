@@ -4,46 +4,59 @@ import Cookies from 'js-cookie';
 import Menu from "../../components/menu/Menu"
 import './assistidos.css'
 import Link from 'next/link';
+import Image from 'next/image';
 
 function Page() {
- 
-  var id_perfil 
+  
   const [data, setData] = useState(false)
   const [perfilMovies, setPerfilMovies] = useState(true)
   
     
   
   useEffect(() => {
-    
-    if(typeof Cookies.get("perfil") != undefined){
-      id_perfil = JSON.parse(Cookies.get("perfil")).id
-    }
+
 
     const fetchMovieData  = async (id) => {
-        let req = await fetch("/api/movies/"+id)
-        let res = await req.json()
-        return res.result
+      let req = await fetch("/api/movies/"+id)
+      let res = await req.json()
+      return res.result
     }
 
-    const handlerFetchMovies = async () => {
+    const handlerFetchMovies = async (id_P) => {
 
-        let req = await fetch("/api/perfil/"+id_perfil+"/lista_assistir?viewed=1")
-        let res = await req.json()
-        if(res.status){
-            var ids = (res.result).map(e => e.id_movie)
-            
-            const promise = ids.map(id => fetchMovieData(id))
-            const result = await Promise.all(promise)
-            
-            if(result.length > 0){
-                setData(result)
-            } 
-        }else{ 
-            setPerfilMovies(false)
-        } 
-    } 
-    handlerFetchMovies()
-  },[id_perfil])
+      let req = await fetch("/api/perfil/"+id_P+"/lista_assistir?viewed=1")
+      let res = await req.json()
+      if(res.status){
+  
+          var ids = (res.result).map(e => e.id_movie) 
+          const promise = ids.map(id => fetchMovieData(id))
+          const result = await Promise.all(promise)
+          
+          if(result.length > 0){
+              setData(result)
+          } 
+      }else{ 
+          setPerfilMovies(false)
+      } 
+  }  
+
+  if(typeof Cookies.get("perfil") != undefined){
+    let id_perfil = JSON.parse(Cookies.get("perfil")).id
+    handlerFetchMovies(id_perfil) 
+  }
+ 
+
+
+
+
+  },[])
+
+
+
+  
+
+  
+
 
   if(!perfilMovies){
     return (
@@ -79,7 +92,7 @@ function Page() {
             <div className='area_cards'>
                 {data && data.map((e,key) => (
                     <div key={key} className='card_assistir'>
-                        <img src={'https://image.tmdb.org/t/p/original/'+e.backdrop_path}/>
+                        <Image alt='imagem representativa' width={800} height={800} src={'https://image.tmdb.org/t/p/original/'+e.backdrop_path}/>
                         <div className='overlay_card'>
                             <p>{e.title}</p>
                             <Link href={"/filmes/"+e.id} className='link_btn_card'>Ver Detalhes</Link>

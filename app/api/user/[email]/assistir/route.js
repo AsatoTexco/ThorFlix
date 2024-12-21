@@ -9,7 +9,7 @@ export async function POST(request,{params}) {
 
     const {id_movie, id_perfil, genres} = body 
 
-    const findByEmail = await sql.query("SELECT * FROM usuarios WHERE email = $1",[email_user])
+    const findByEmail = await sql.query("SELECT * FROM users WHERE email = $1",[email_user])
     
     if(findByEmail.rowCount == 0){
       return NextResponse.json({ status: false, error: "Nenhum Usuário Encontrado" }, { status: 200 });

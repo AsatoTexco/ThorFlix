@@ -6,23 +6,25 @@ export async function POST(request) {
   try {
 
     const body = await request.json()
-    const {email, senha} = body
-    if(!email || !senha){
+    const {email, password} = body
+    if(!email || !password){
       return NextResponse.json({ status:false,message:"Insira todos os dados" }, { status: 500 });
     }
-
-    if(senha.length == 0){ 
+    
+    if(password.length == 0){ 
       return NextResponse.json({ status:false,message:"Insira todos os dados" }, { status: 500 });
     }
     const JWT_WEB_TOKEN = process.env.JWT_WEB_TOKEN
-
- 
+    
+    
     const result =
-      await sql.query(`SELECT * FROM usuarios WHERE email = $1 AND senha = $2`,[email,senha]);
-
+    await sql.query(`SELECT * FROM users WHERE email = $1 AND password = $2`,[email,password]);
+    
+    
     if(result.rowCount == 0){
-        return NextResponse.json({status:false }, { status: 500 });
+      return NextResponse.json({status:false }, { status: 500 });
     } 
+    delete result.rows[0]['password']
     const token = jwt.sign(result.rows[0],JWT_WEB_TOKEN)
     
     // token composição:

@@ -14,6 +14,7 @@ import { far } from '@fortawesome/free-regular-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import CardFilmeHome from '../../../components/cardFilmeHome/CardFilmeHome';
 import StarsIndicacao from '../../../components/starsIndicacao/StarsIndicacao'
+import Image from 'next/image';
 
 function Page({params}) {
 
@@ -98,7 +99,7 @@ function Page({params}) {
     handleFetchData()
     handleFetchSimilar()
      
-  },[])
+  },[id_movie])
 
   if(!load){
     return <div className='bg-default'> 
@@ -115,10 +116,10 @@ function Page({params}) {
       <Menu />
       <div className='about_filme_page'>
         <div className='content_filme_about'> 
-            <img className='img_background' src={"https://image.tmdb.org/t/p/original"+( load.belongs_to_collection == null ? load.backdrop_path : load.belongs_to_collection.backdrop_path == null ? load.backdrop_path : load.belongs_to_collection.backdrop_path ) }/>
+            <Image alt='imagem representativa' width={1000} height={500} className='img_background' src={"https://image.tmdb.org/t/p/original"+( load.belongs_to_collection == null ? load.backdrop_path : load.belongs_to_collection.backdrop_path == null ? load.backdrop_path : load.belongs_to_collection.backdrop_path ) }/>
 
             {/* backdrop_path */}
-            <img className='img_icon_logo' src={"https://image.tmdb.org/t/p/original"+( load.backdrop_path == null ? load.belongs_to_collection == null ? load.backdrop_path :  load.belongs_to_collection.backdrop_path == null ? load.backdrop_path : load.belongs_to_collection.backdrop_path : load.backdrop_path )}/>
+            <Image alt='imagem representativa' width={400} height={400} className='img_icon_logo' src={"https://image.tmdb.org/t/p/original"+( load.backdrop_path == null ? load.belongs_to_collection == null ? load.backdrop_path :  load.belongs_to_collection.backdrop_path == null ? load.backdrop_path : load.belongs_to_collection.backdrop_path : load.backdrop_path )}/>
 
             <div className='about_session'>
 

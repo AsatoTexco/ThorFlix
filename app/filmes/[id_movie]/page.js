@@ -1,7 +1,5 @@
-'use client'
-import { signOut, useSession } from 'next-auth/react'
-import { useRouter } from 'next/navigation'
-import React, { useEffect, useRef, useState } from 'react'
+'use client' 
+import React, { useEffect, useState } from 'react'
 import Cookies from 'js-cookie';
 import Menu from "../../../components/menu/Menu"
 import './about_filme.css' 
@@ -15,6 +13,11 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import CardFilmeHome from '../../../components/cardFilmeHome/CardFilmeHome';
 import StarsIndicacao from '../../../components/starsIndicacao/StarsIndicacao'
 import Image from 'next/image';
+import CustomCarousel from '@components/carousel/customCarousel/CustomCarousel'
+import PersonElenco from "@components/personElenco/PersonElenco"
+
+import { useSession } from 'next-auth/react';
+import LoadingCircles from '@components/loading/loadingCircles/LoadingCircles';
 
 function Page({params}) {
 
@@ -22,9 +25,7 @@ function Page({params}) {
   const [trailer, setTrailer] = useState('')
   const [assistirDps, setAssistirDps] = useState(false)
   const [similar, setSimilar] = useState(false)
-  
-
-  const router = useRouter() 
+   
   const session = useSession()
    
   const id_movie = params.id_movie 
@@ -66,8 +67,8 @@ function Page({params}) {
         let req = await fetch("/api/movies/"+id_movie)
         let res = await req.json()
         if(res.status){ 
-          setLoad(res.result) 
-          setTrailer(res.trailer) 
+            setLoad(res.result)  
+            setTrailer(res.result.videos?.results[0]?.key) 
         } 
     }
     
@@ -105,8 +106,8 @@ function Page({params}) {
     return <div className='bg-default'> 
                 <Menu />
                 <div className='about_filme_page'>
-                    <div className='content_filme_about'> 
-                        <h1>Loading...</h1> 
+                    <div className='content_filme_about'>  
+                        <LoadingCircles/>
                     </div>
                 </div>
             </div>
@@ -118,17 +119,14 @@ function Page({params}) {
         <div className='content_filme_about'> 
             <Image alt='imagem representativa' width={1000} height={500} className='img_background' src={"https://image.tmdb.org/t/p/original"+( load.belongs_to_collection == null ? load.backdrop_path : load.belongs_to_collection.backdrop_path == null ? load.backdrop_path : load.belongs_to_collection.backdrop_path ) }/>
 
-            {/* backdrop_path */}
             <Image alt='imagem representativa' width={400} height={400} className='img_icon_logo' src={"https://image.tmdb.org/t/p/original"+( load.backdrop_path == null ? load.belongs_to_collection == null ? load.backdrop_path :  load.belongs_to_collection.backdrop_path == null ? load.backdrop_path : load.belongs_to_collection.backdrop_path : load.backdrop_path )}/>
 
             <div className='about_session'>
-
 
                 <h1 className='title_movie'>{load.title}</h1>
                 <p className='dataMovie'>{load.release_date.slice(0,4)}</p>
 
                 <StarsIndicacao numStars={load.vote_average} />
-                
 
                 <h2 className='sobre_movie'>{load.overview}</h2>
                  
@@ -154,20 +152,24 @@ function Page({params}) {
   
                 }}> Assistir mais Tarde <FontAwesomeIcon icon="fa-solid fa-plus"/></button>
 
-                }
-                
+              } 
+            </div>
 
-             </div>
-           
+            <CustomCarousel > 
+                {load.credits.cast[0] && load.credits.cast.map((e,idx) => ( 
+                    <PersonElenco key={idx} data={e}/> 
+                ))}  
+            </CustomCarousel>
+
             <iframe className='trailerYT' src={"https://www.youtube.com/embed/"+trailer} title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-             
+            
             
             <h1 className='txt_similar'>Você também pode gostar...  </h1>
              <CustomCarousel>
                 {similar && similar.map((e, index) => ( 
                     <CardFilmeHome data_filme={e} key={index} /> 
                 ))}
-            </CustomCarousel>
+              </CustomCarousel>
                     
             
 
@@ -178,72 +180,9 @@ function Page({params}) {
     </div>
   )
 }		 
-
-function Box({ index }) {
-    return <div className="box">Box {index}</div>;
-}
+ 
 
 
-function CustomCarousel(props) {
-    const slider = useRef(null);
-    let isDown = useRef(false);
-    let startX = useRef(null);
-    let scrollLeft = useRef(null);
-  
-    useEffect(() => {
-         
-      if (slider && slider.current) {
-        let sliderRef = slider.current;
-        sliderRef.addEventListener("mousedown", one);
-        sliderRef.addEventListener("mousedown", two);
-        sliderRef.addEventListener("mouseleave", three);
-        sliderRef.addEventListener("mouseup", four);
-        sliderRef.addEventListener("mousemove", five);
-  
-        return () => {
-          sliderRef.removeEventListener("mousedown", one);
-          sliderRef.removeEventListener("mousedown", two);
-          sliderRef.removeEventListener("mouseleave", three);
-          sliderRef.removeEventListener("mouseup", four);
-          sliderRef.removeEventListener("mousemove", five);
-        };
-      }
-    }, []);
-  
-    function one(e) { 
-      isDown.current = true;
-      startX.current = e.pageX - slider.current.offsetLeft;
-      scrollLeft.current = slider.current.scrollLeft;
-    }
-  
-    function two(e) {
-      isDown.current = true;
-      startX.current = e.pageX - slider.current.offsetLeft;
-      scrollLeft.current = slider.current.scrollLeft;
-    }
-  
-    function three() {
-      isDown.current = false;
-    }
-  
-    function four() {
-      isDown.current = false;
-    }
-  
-    function five(e) {
-      if (!isDown.current) return;
-      e.preventDefault();
-      const x = e.pageX - slider.current.offsetLeft;
-      const walk = x - startX.current;
-      slider.current.scrollLeft = scrollLeft.current - walk;
-    }
-  
-    return (
-      <div className="items" ref={slider}>
-        {props.children}
-      </div>
-    );
-  }
 
 
 export default Page

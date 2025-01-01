@@ -13,6 +13,7 @@ import { fab } from '@fortawesome/free-brands-svg-icons'
 import { fas } from '@fortawesome/free-solid-svg-icons'
 import { far } from '@fortawesome/free-regular-svg-icons' 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import LoadingCircles from '@components/loading/loadingCircles/LoadingCircles';
 
 
 
@@ -22,9 +23,9 @@ function Page() {
   const router = useRouter() 
   const session = useSession()
 
-  const [fyData, setFyData] = useState([]) 
+  const [fyData, setFyData] = useState(false) 
 
-  
+ 
   useEffect(() => {
     
     const handleFetchDataFy = async () => {

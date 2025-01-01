@@ -5,17 +5,15 @@ import Menu from "../../components/menu/Menu"
 import './assistidos.css'
 import Link from 'next/link';
 import Image from 'next/image';
+import LoadingCircles from '@components/loading/loadingCircles/LoadingCircles';
 
 function Page() {
   
   const [data, setData] = useState(false)
-  const [perfilMovies, setPerfilMovies] = useState(true)
-  
+  const [perfilMovies, setPerfilMovies] = useState(true) 
+
+  useEffect(() => { 
     
-  
-  useEffect(() => {
-
-
     const fetchMovieData  = async (id) => {
       let req = await fetch("/api/movies/"+id)
       let res = await req.json()
@@ -38,16 +36,12 @@ function Page() {
       }else{ 
           setPerfilMovies(false)
       } 
-  }  
+    }   
 
-  if(typeof Cookies.get("perfil") != undefined){
-    let id_perfil = JSON.parse(Cookies.get("perfil")).id
-    handlerFetchMovies(id_perfil) 
-  }
- 
-
-
-
+    if(typeof Cookies.get("perfil") != undefined){
+      let id_perfil = JSON.parse(Cookies.get("perfil")).id
+      handlerFetchMovies(id_perfil) 
+    } 
 
   },[])
 
@@ -76,7 +70,7 @@ function Page() {
           <Menu />
           <div className='para_assistir_page'>
             <div className='content_para_assistir'> 
-              <h1 className='title_page'>Loading...</h1>
+              <h1 className='title_page'> <LoadingCircles/></h1>
             </div>
           </div>
         </div>

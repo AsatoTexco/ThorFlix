@@ -1,0 +1,23 @@
+.items {
+    margin-top: 20px;
+    margin-bottom: 50px;
+    position: relative;
+    width: 90%;
+    gap: 20px; 
+    overflow-y: hidden; 
+    transition: all 0.2s; 
+    will-change: transform; 
+    cursor: pointer;
+    padding: 15px 0;
+    overflow-x: scroll; 
+    display: grid;
+    grid-auto-flow: column; 
+    user-select: none;
+} 
+.items {
+    -ms-overflow-style: none; /* Internet Explorer 10+ */
+    scrollbar-width: none; /* Firefox */
+}
+.items::-webkit-scrollbar {
+    display: none; /* Safari and Chrome */
+}

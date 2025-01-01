@@ -7,7 +7,7 @@
 }
 .bar_query{ 
     height: 80px;
-    width: 100%;
+    width: 90%;
     max-width: 1200px;
     border-radius: 10px;
     background-color: rgba(65, 65, 65, 0.116);
@@ -33,4 +33,7 @@
     text-align: center;
     color: white;
     font-size: 30px;
+}
+.spaceLoading{
+    margin-top: 150px;
 }

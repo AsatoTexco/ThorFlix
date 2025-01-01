@@ -51,6 +51,7 @@
     color: rgb(185, 185, 185);
     width: 95%;
     max-width: 1200px;
+    word-wrap: break-word;
 }
 .genres{
     display: flex;
@@ -86,45 +87,12 @@
 }
 
 .txt_similar{
+    margin-top: 10px;
     width: 90%;
     font-size: 22px;
     text-align: start;
-}
-.box {
-    box-sizing: border-box;
-    width: 200px;
-    height: 200px; 
-    background-color: blueviolet;
-    border: 1px solid rgb(0, 0, 0);
-  }
-  
-  .items {
-    margin-top: 20px;
-    margin-bottom: 50px;
-    position: relative;
-    width: 90%;
-    gap: 20px;
-    overflow-x: scroll;
-    overflow-y: hidden;
-    white-space: nowrap;
-    transition: all 0.2s; 
-    will-change: transform;
-    user-select: none;
-    cursor: pointer;
-    padding: 0;
-    overflow-x: scroll;
-    overflow-y: hidden;
-    display: grid;
-    grid-auto-flow: column;
-  }
-  
-  .items {
-    -ms-overflow-style: none; /* Internet Explorer 10+ */
-    scrollbar-width: none; /* Firefox */
-  }
-  .items::-webkit-scrollbar {
-    display: none; /* Safari and Chrome */
-  }
+} 
+
   
 .trailerYT{
 

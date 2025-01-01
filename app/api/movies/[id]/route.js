@@ -8,33 +8,16 @@ export async function GET(request,{params}) {
     const MOVIE_API = process.env.MOVIE_API
 
 
-    let req = await fetch("https://api.themoviedb.org/3/movie/" + id + "?language=pt-BR", {
+    let req = await fetch("https://api.themoviedb.org/3/movie/" + id + "?language=pt-BR&append_to_response=videos,credits", {
         method: "GET",
         headers: {
             'Authorization': 'Bearer ' + MOVIE_API,
             'Accept': 'application/json'
         }
     }); 
-    let res = await req.json()
-    
-    let r = await fetch("https://api.themoviedb.org/3/movie/" + id + "/videos?language=pt-BR", {
-      method: "GET",
-      headers: {
-          'Authorization': 'Bearer ' + MOVIE_API,
-          'Accept': 'application/json'
-      }
-    })
-    let s = await r.json()
-    var trailer = false
-    if(s.results.length > 0){
-        s.results.forEach(element => {
-            trailer = element.type == "Trailer" ? element.key : false 
-        });
-    } 
-     
-    
+    let res = await req.json() 
  
-      return NextResponse.json({ status:true, result:res, trailer:trailer }, { status: 200 });
+      return NextResponse.json({ status:true, result:res  }, { status: 200 });
   } catch (error) {
     return NextResponse.json({ error }, { status: 500 });
   }

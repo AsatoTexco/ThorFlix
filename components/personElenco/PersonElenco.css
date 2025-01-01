@@ -1,0 +1,47 @@
+.areaPersonElenco{
+    width: 200px;
+    height: 400px;
+     
+}
+.areaPersonElenco img{
+    pointer-events: none;
+}
+.areaImagemPerson{ 
+    position: relative; 
+    z-index: 99; 
+}
+.areaPersonElenco:hover .imagePersonElenco{
+
+    transform: scale(1.05);
+    border: 5px solid rgb(70, 70, 70);
+
+}
+.imagePersonElenco{ 
+    width: 200px;
+    height: 300px; 
+    position: relative;
+    object-fit: cover;
+    top: 0;
+    transition: .1s ease-in-out;
+
+}
+
+.areaPersonElenco h3,h4{
+
+    text-align: start;
+    width: 100%; 
+    user-select: text;
+
+}
+.areaPersonElenco h3{
+    margin-top: 6px;
+}
+.areaPersonElenco h4{
+    color: gray;
+    word-wrap: break-word;
+}
+.areaImagemPerson{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}

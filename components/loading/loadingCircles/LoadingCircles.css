@@ -1,0 +1,38 @@
+.dots{
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    padding: 10px;
+
+}
+.dot{ 
+    height: 15px;
+    width: 15px;
+    background-color: var(--blue-light);
+    border-radius: 100%; 
+}
+.dot:nth-child(1){ 
+    animation: jumpingAnimate 1s infinite ease-in-out; 
+}
+.dot:nth-child(2){ 
+    animation: jumpingAnimate 1s infinite ease-in-out 0.3s; 
+}
+.dot:nth-child(3){ 
+    animation: jumpingAnimate 1s infinite ease-in-out  0.6s; 
+}
+
+@keyframes jumpingAnimate {
+    0%{
+        transform: translateY(0px);
+       
+    }
+    50%{
+        transform: translateY(-6px);
+        opacity: 0.2;
+    }
+    100%{
+        transform: translateY(0px);
+    }
+}

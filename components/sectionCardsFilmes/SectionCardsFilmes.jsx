@@ -1,13 +1,14 @@
 import React from 'react'
 import './SectionCardsFilmes.css'
 import CardFilmeHome from "../cardFilmeHome/CardFilmeHome"
+import LoadingCircles from '@components/loading/loadingCircles/LoadingCircles'
 
 function SectionCardsFilmes(props) {
   
   if(!props.data){
     return (
         <div className='area_total_cardsFilmes'>
-           LOADING...
+            <LoadingCircles/>
         </div>
       )
   }

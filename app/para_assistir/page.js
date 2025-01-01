@@ -8,6 +8,7 @@ import './para_assistir.css'
 import {decodeJwt} from 'jose';
 import Link from 'next/link';
 import Image from 'next/image';
+import LoadingCircles from '@components/loading/loadingCircles/LoadingCircles';
 
 function Page() {
 
@@ -91,7 +92,7 @@ function Page() {
           <Menu />
           <div className='para_assistir_page'>
             <div className='content_para_assistir'> 
-              <h1 className='title_page'>Loading...</h1>
+              <h1 className='title_page'> <LoadingCircles/></h1>
             </div>
           </div>
         </div>

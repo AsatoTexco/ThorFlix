@@ -23,8 +23,7 @@ function StarsIndicacao(props) {
   }
 
   const avaliacao = Math.round( (props.numStars / 2) * 10) / 10 ;
-  const qntStar = parseInt(String(avaliacao).charAt(0))
-  
+  const qntStar = parseInt(String(avaliacao).charAt(0)) 
 
   if(props.numStars < 1){
     return (
@@ -32,14 +31,12 @@ function StarsIndicacao(props) {
             <FontAwesomeIcon icon="fa-solid fa-star" style={{color: "#c4c4c4",}} /> {avaliacao}
         </div>
       )
-  }
-
-
+  } 
 
   return (
     <div className='areaStars'>
        {[...Array(qntStar)].map((_, index) => (
-         <FontAwesomeIcon key={index} icon="fa-solid fa-star" style={{color: "#FFD43B",}} /> 
+         <FontAwesomeIcon key={index} icon="fa-solid fa-star" style={{color: "#43b9ce",}} /> 
       ))} <label >{avaliacao}</label>
     </div>
   )

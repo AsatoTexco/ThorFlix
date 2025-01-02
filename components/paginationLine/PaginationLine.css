@@ -1,0 +1,82 @@
+.paginationLineArea{
+    display: flex;
+    color: white;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    padding: 10px; 
+}
+.numbersPaginationSel{
+    display: flex;
+    gap: 5px;
+}
+.selectPageFL{
+    height: 40px;
+    min-width: 40px;
+    color: rgb(168, 168, 168);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 6px;
+    transition: .2s;
+}
+.selectPageFL:hover{
+    background-color: rgb(43, 43, 43);
+}
+
+.selectedPageFL{
+    height: 40px;
+    min-width: 40px;
+    color: rgb(168, 168, 168);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 6px;
+    transition: .2s;
+    background-color: var(--red-2);
+}
+.selectedPageFL:hover{
+    background-color: var(--red-1);
+}
+.contentPag{
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    justify-content: center;
+}
+.selectPageBN{
+    height: 40px;
+    min-width: 40px;
+    color: rgb(168, 168, 168);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: .2s;
+}
+.selectPageBN:hover{
+    background-color: rgb(43, 43, 43);
+}
+
+@media (max-width:500px) {
+    
+    .selectPageBN{
+        min-width: 30px;
+        height: 30px;
+    }
+    .selectedPageFL{
+        min-width: 30px;
+        height: 30px;
+    }
+    .selectPageFL{
+        min-width: 30px;
+        height: 30px;
+    }
+    .numbersPaginationSel{
+        gap: 1px;
+    }
+    .contentPag{
+        gap: 1px;
+    }
+}

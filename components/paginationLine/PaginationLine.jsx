@@ -10,123 +10,64 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import Link from 'next/link'
 
 
-function PaginationLine(props) {
- 
-    if (!props.qntPage || !props.pageAtual || !props.query) {
-        return
+function PaginationLine({ qntPage, pageAtual, query }) {
+
+    if (!qntPage || !pageAtual || !query) {
+        return <h1>Ocorreu um Erro, já estamos resolvendo</h1>
+    }  
+    const totalPages = parseInt(qntPage)
+    const currentPage = parseInt(pageAtual) 
+    const paginationItems = []
+
+    const createPageLink = (page, isSelected) => {
+        paginationItems.push(
+            <Link key={page} href={"/filmes?q=" + query + "&page=" + (page)}>
+                <div className={isSelected ? "selectedPageFL" : "selectPageFL"}>{page}</div>
+            </Link>
+        )
+    } 
+    const createPointsPagination = () => {
+        paginationItems.push(
+            <div key={Math.random()}>
+                <div className={"selectPageFL"}>...</div>
+            </div>
+        )
     }
-    
 
-    const qnt = props.qntPage
-    const sel = parseInt(props.pageAtual)
-    const items = []
-    const host = props.host
-
-    if (qnt <= 9) {
-
-        for (let index = 0; index < qnt; index++) {
-            const escolhido = sel == (index + 1)
-            items.push(
-                <Link href={"/filmes?q=" + props.query + "&page=" + (index + 1)}>
-                    <div key={index} className={escolhido == true ? "selectedPageFL" : "selectPageFL"}>{index + 1}</div>
-                </Link>
-            )
-        }
-
+    if (totalPages <= 9) { 
+        for (let index = 0; index < totalPages; index++) {
+            createPageLink(index + 1, currentPage == (index + 1))
+        } 
     } else {
-
-        if (sel <= 5) {
-
+        if (currentPage <= 5) {
             for (let index = 0; index < 5; index++) {
-                const escolhido = sel == (index + 1)
-                items.push(
-                    <Link href={"/filmes?q=" + props.query + "&page=" + (index + 1)}>
-                        <div key={index} className={escolhido == true ? "selectedPageFL" : "selectPageFL"}>{index + 1}</div>
-                    </Link>
-                )
+                createPageLink(index + 1, currentPage == (index + 1))
             }
-
         } else {
+            createPageLink(1, false) 
+            createPointsPagination()
 
-            items.push(
-                <Link href={"/filmes?q=" + props.query + "&page=" + 1}>
-                    <div className={"selectPageFL"}>1</div>
-                </Link>
-            )
-            items.push(
-                <div>
-                    <div className={"selectPageFL"}>...</div>
-                </div>
-            )
-
-            if (qnt - sel >= 5) {
-
-                items.push(
-                    <Link href={"/filmes?q=" + props.query + "&page=" + (sel - 2)}>
-                        <div className={"selectPageFL"}>{sel - 2}</div>
-                    </Link>
-                )
-                items.push(
-                    <Link href={"/filmes?q=" + props.query + "&page=" + (sel - 1)}>
-                        <div className={"selectPageFL"}>{sel - 1}</div>
-                    </Link>
-                )
-
+            if (totalPages - currentPage >= 5) {
+                createPageLink(currentPage - 2, false)
+                createPageLink(currentPage - 1, false)
             }
-
-        }
-
-        if (qnt - sel >= 5) {
-
-            if (sel <= 5) {
-
-                items.push(
-                    <Link href={"/filmes?q=" + props.query + "&page=" + (6)}>
-                        <div className={"selectPageFL"}>{6}</div>
-                    </Link>
-                )
-                items.push(
-                    <Link href={"/filmes?q=" + props.query + "&page=" + (7)}>
-                        <div className={"selectPageFL"}>{7}</div>
-                    </Link>
-                )
+        } 
+        if (totalPages - currentPage >= 5) { 
+            if (currentPage <= 5) {
+                createPageLink(6, false)
+                createPageLink(7, false)
             } else {
-
-                items.push(
-                    <Link href={"/filmes?q=" + props.query + "&page=" + (sel)}>
-                        <div className={"selectedPageFL"}>{sel}</div>
-                    </Link>
-                )
-                items.push(
-                    <Link href={"/filmes?q=" + props.query + "&page=" + (sel + 1)}>
-                        <div className={"selectPageFL"}>{sel + 1}</div>
-                    </Link>
-                )
-                items.push(
-                    <Link href={"/filmes?q=" + props.query + "&page=" + (sel + 2)}>
-                        <div className={"selectPageFL"}>{sel + 2}</div>
-                    </Link>
-                )
+                createPageLink(currentPage, true)
+                createPageLink(currentPage + 1, false)
+                createPageLink(currentPage + 2, false)
             }
 
-            items.push(
-                <div>
-                    <div className={"selectPageFL"}>...</div>
-                </div>
-            )
-            items.push(
-                <Link href={"/filmes?q=" + props.query + "&page=" + (qnt)}>
-                    <div className={"selectPageFL"}>{qnt}</div>
-                </Link>
-            )
+            createPointsPagination()
+            createPageLink(totalPages, false)
+
         } else {
-            for (let index = qnt - 6; index < qnt + 1; index++) {
-                const escolhid = index == sel 
-                items.push(
-                    <Link href={"/filmes?q=" + props.query + "&page=" + (index)}>
-                        <div className={escolhid == true ? "selectedPageFL" : "selectPageFL"}>{index}</div>
-                    </Link>
-                )
+            for (let index = totalPages - 6; index < totalPages + 1; index++) {
+                createPageLink(index, index == currentPage)
             }
         }
     }
@@ -135,15 +76,15 @@ function PaginationLine(props) {
         <div className='paginationLineArea'>
             <div className="contentPag">
 
-                <Link href={"/filmes?q=" + props.query + "&page=" + (sel > 1 ? sel-1 : sel)} className="selectPageBN">
+                <Link href={"/filmes?q=" + query + "&page=" + (currentPage > 1 ? currentPage - 1 : currentPage)} className="selectPageBN">
                     <FontAwesomeIcon icon="fa-solid fa-angle-left" />
                 </Link>
 
                 <div className="numbersPaginationSel">
-                    {items}
+                    {paginationItems}
                 </div>
 
-                <Link href={"/filmes?q=" + props.query + "&page=" + (sel+1 > qnt ? qnt : sel + 1 )} className="selectPageBN">
+                <Link href={"/filmes?q=" + query + "&page=" + (currentPage + 1 > totalPages ? totalPages : currentPage + 1)} className="selectPageBN">
                     <FontAwesomeIcon icon="fa-solid fa-angle-right" />
                 </Link>
 

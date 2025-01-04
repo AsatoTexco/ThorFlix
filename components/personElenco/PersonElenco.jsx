@@ -12,7 +12,7 @@ function PersonElenco(props) {
     <div className='areaPersonElenco'>
         
         <div className="areaImagemPerson">
-            <Image className='imagePersonElenco' width={255} height={255} src={`${imageSrc}`} />
+            <Image className='imagePersonElenco' width={255} height={255} alt='Imagem representativa' src={`${imageSrc}`} />
         </div>
 
         <h3>{d.name}</h3>

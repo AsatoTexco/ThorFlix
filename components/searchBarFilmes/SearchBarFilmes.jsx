@@ -20,11 +20,10 @@ function SearchBarFilmes() {
     const [data, setData] = useState(false)
     const [qntPage, setQntPage] = useState(0)
 
-
     const pathname = usePathname()
     const router = useRouter()
     const searchParams = useSearchParams()
- 
+
     const queryParam = searchParams.get('q')
     const pageParam = searchParams.get('page')
 
@@ -57,12 +56,12 @@ function SearchBarFilmes() {
 
         loadDataMoviesSearch()
 
-    }, [searchParams, router, pathname])
+    }, [searchParams, router, pathname, pageParam, queryParam])
 
     const createQueryString = async () => {
 
         setData(false)
-        const params = new URLSearchParams(searchParams.toString()) 
+        const params = new URLSearchParams(searchParams.toString())
         params.set('q', query)
         params.set('page', 1)
         router.push(pathname + "?" + params)
@@ -80,7 +79,7 @@ function SearchBarFilmes() {
                 </button>
             </form>
 
-             
+
             {!data &&
                 <div className="spaceLoading">
                     <LoadingCircles />
@@ -89,8 +88,8 @@ function SearchBarFilmes() {
             {data &&
                 <FilmesFilter data={data} />
             }
+            <PaginationLine qntPage={qntPage} pageAtual={pageParam} query={queryParam} />
 
-            <PaginationLine qntPage={qntPage} pageAtual={pageParam} query={queryParam}   />
 
         </div>
     )

@@ -25,7 +25,8 @@
     "next-auth": "^4.24.7",
     "nodemailer": "^6.9.16",
     "react": "^18",
-    "react-dom": "^18"
+    "react-dom": "^18",
+    "sharp": "^0.33.5"
   },
   "devDependencies": {
     "@types/react": "18.3.2",

@@ -29,6 +29,7 @@ function getCookieValue(cookieString, cookieName) {
 // MIDDLEWARE VALIDAR LOGIN  
 export async function middleware(request: NextRequest) {
   
+  var res: NextResponse<unknown>
   const  cookie = request.headers.get('cookie')  
   let cookiesSt = getCookieValue(cookie,"next-auth.session-token") 
   const tokenFacebook = cookiesSt == null ? getCookieValue(cookie,"__Secure-next-auth.session-token") : cookiesSt
@@ -39,7 +40,7 @@ export async function middleware(request: NextRequest) {
     if(typeof cookie_token != "undefined"){
       token = cookie_token.value 
       if(!decodeJwt(token)['id']){
-        return NextResponse.redirect(new URL('/login', request.url)); 
+        res = NextResponse.redirect(new URL('/login', request.url)); 
       } 
       const secret = new TextEncoder().encode(process.env.JWT_WEB_TOKEN)
       try{
@@ -47,11 +48,11 @@ export async function middleware(request: NextRequest) {
         console.log("token Válido") 
       }catch(erro){
         console.log('token Inválido')
-        return NextResponse.redirect(new URL('/login', request.url)); 
+        res = NextResponse.redirect(new URL('/login', request.url)); 
       }
       // LOGADO 
     } else{
-      return NextResponse.redirect(new URL('/login', request.url)); 
+      res = NextResponse.redirect(new URL('/login', request.url)); 
     }
 
   } else{
@@ -63,7 +64,7 @@ export async function middleware(request: NextRequest) {
       });
       if(token2 == null){
         console.log("Login Inválido -> Facebook")
-        return NextResponse.redirect(new URL('/login', request.url));  
+        res = NextResponse.redirect(new URL('/login', request.url));  
       }
   
     }catch(erro){
@@ -71,7 +72,14 @@ export async function middleware(request: NextRequest) {
     }
 
   }
+  if(res){
     
+    res.headers.set(
+      "Set-Cookie",
+      `urlCallback=${request.url}; Path=/; Secure; SameSite=Strict`
+    );
+    return res
+  }
 }
 
 // PATHS 

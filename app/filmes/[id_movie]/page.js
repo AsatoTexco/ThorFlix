@@ -16,6 +16,8 @@ import Image from 'next/image';
 import CustomCarousel from '@components/carousel/customCarousel/CustomCarousel'
 import PersonElenco from "@components/personElenco/PersonElenco"
 
+import LinkEmb from "@components/linkEmb/LinkEmb"
+
 import { useSession } from 'next-auth/react';
 import LoadingCircles from '@components/loading/loadingCircles/LoadingCircles';
 
@@ -25,6 +27,8 @@ function Page({params}) {
   const [trailer, setTrailer] = useState('')
   const [assistirDps, setAssistirDps] = useState(false)
   const [similar, setSimilar] = useState(false)
+  const [filmeEncontrado, setFilmeEncontrado] = useState(true)
+  const [allowedUser, setAllowedUser] = useState(false)
    
   const session = useSession()
    
@@ -65,11 +69,13 @@ function Page({params}) {
     const handleFetchData = async () => {
 
         let req = await fetch("/api/movies/"+id_movie)
-        let res = await req.json()
-        if(res.status){ 
+        let res = await req.json() 
+        if(res.status){  
             setLoad(res.result)  
-            setTrailer(res.result.videos?.results[0]?.key) 
-        } 
+            setTrailer(res.result.videos?.results[0]?.key)
+        } else{
+            setFilmeEncontrado(false)
+        }
     }
     
     const handleFetchDataPerfil = async () => {
@@ -82,8 +88,9 @@ function Page({params}) {
         }
 
         let req = await fetch("/api/perfil/"+idP+"/lista_assistir/"+id_movie)
-        let res = await req.json() 
-        if(res.status){
+        let res = await req.json()  
+        if(res.status){ 
+            setAllowedUser(res.allowedUser)
             setAssistirDps(true)    
         } 
     }
@@ -103,6 +110,16 @@ function Page({params}) {
   },[id_movie])
 
   if(!load){
+    if(!filmeEncontrado){
+        return <div className='bg-default'> 
+                <Menu />
+                <div className='about_filme_page'>
+                    <div className='content_filme_about'>  
+                        Filme não encontrado
+                    </div>
+                </div>
+            </div>
+    } 
     return <div className='bg-default'> 
                 <Menu />
                 <div className='about_filme_page'>
@@ -127,6 +144,9 @@ function Page({params}) {
                 <p className='dataMovie'>{load.release_date.slice(0,4)}</p>
 
                 <StarsIndicacao numStars={load.vote_average} />
+
+
+                {allowedUser &&  <LinkEmb idMovie={id_movie} /> }
 
                 <h2 className='sobre_movie'>{load.overview}</h2>
                  
@@ -162,7 +182,6 @@ function Page({params}) {
             </CustomCarousel>
 
             <iframe className='trailerYT' src={"https://www.youtube.com/embed/"+trailer} title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-            
             
             <h1 className='txt_similar'>Você também pode gostar...  </h1>
              <CustomCarousel>

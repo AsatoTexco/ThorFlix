@@ -72,9 +72,18 @@ function Page() {
     let res = await req.json()  
  
     
-    if(res.status){
+    if(res.status){ 
+      const urlC = Cookies.get('urlCallback')
+
       Cookies.set("token",res.token) 
-      router.push("/perfis")
+      if(urlC != undefined){
+        Cookies.remove("urlCallback", { path: "/" }); 
+        router.replace(urlC)
+ 
+      }else{ 
+        router.push("/perfis") 
+      }
+
     }else{
       alert("Credenciais Inválidas")
     } 

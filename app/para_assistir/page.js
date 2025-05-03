@@ -60,10 +60,15 @@ function Page() {
           } 
       } 
     
-    if(typeof Cookies.get("perfil") != undefined){
-      let id_perfil = JSON.parse(Cookies.get("perfil")).id
-      handlerFetchMovies(id_perfil) 
+    var cookiePerfil = Cookies.get("perfil")
+    if(cookiePerfil == undefined){
+      router.push('/perfis')
+      return
     }
+     
+    let id_perfil = JSON.parse(Cookies.get("perfil")).id
+    handlerFetchMovies(id_perfil) 
+    
 
     const fetchMovieData  = async (id) => {
         let req = await fetch("/api/movies/"+id)
@@ -72,7 +77,7 @@ function Page() {
     }
 
      
-  },[])
+  },[router])
 
   if(!perfilMovies){
     return (

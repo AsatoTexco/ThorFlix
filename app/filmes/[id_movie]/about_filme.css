@@ -101,6 +101,15 @@
     height: 400px;
 
 }
+
+.areaYearClassificacaoIndicativa{
+
+    display: flex;
+    gap: 20px;
+    align-items: center;
+}
+
+
 @media (max-width: 800px) {
 
     .sobre_movie{

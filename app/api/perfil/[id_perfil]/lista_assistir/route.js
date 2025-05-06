@@ -14,8 +14,8 @@ export async function GET(request,{params}) {
        
       result = await sql.query("SELECT * FROM lista_assistir WHERE id_perfil = $1 ",[id_perfil]) 
       
-    }else{ 
-      result = await sql.query("SELECT * FROM lista_assistir WHERE id_perfil = $1 AND viewed = $2",[id_perfil,viewed]) 
+    }else{
+      result = await sql.query("SELECT * FROM lista_assistir WHERE id_perfil = $1 AND viewed = $2 ORDER BY id DESC",[id_perfil,viewed]) 
     }
       
     if(result.rowCount > 0){

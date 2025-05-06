@@ -1,0 +1,17 @@
+.btnCRLF{
+
+    background-color: var(--blue-light); 
+    border-radius: 100%; 
+    padding: 7px 12px;
+    display: block;
+    position: relative;
+    top: 0;
+    left: 0;
+    font-size: 20px;
+    transition: .2s;
+}
+.btnCRLF:hover{ 
+    background-color: var(--blue-2); 
+    transform: scale(20); 
+} 
+ 

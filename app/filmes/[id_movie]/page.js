@@ -15,11 +15,13 @@ import StarsIndicacao from '../../../components/starsIndicacao/StarsIndicacao'
 import Image from 'next/image';
 import CustomCarousel from '@components/carousel/customCarousel/CustomCarousel'
 import PersonElenco from "@components/personElenco/PersonElenco"
+import ClassificacaoIndicativa from "@components/classificacaoIndicativa/ClassificacaoIndicativa"
 
 import LinkEmb from "@components/linkEmb/LinkEmb"
 
 import { useSession } from 'next-auth/react';
 import LoadingCircles from '@components/loading/loadingCircles/LoadingCircles';
+import { useRouter } from 'next/navigation';
 
 function Page({params}) {
 
@@ -29,18 +31,21 @@ function Page({params}) {
   const [similar, setSimilar] = useState(false)
   const [filmeEncontrado, setFilmeEncontrado] = useState(true)
   const [allowedUser, setAllowedUser] = useState(false)
-   
+ 
   const session = useSession()
-   
+  const router = useRouter() 
+
   const id_movie = params.id_movie 
   
    
   const handleSalvarAssistir = async (genres,id_movie) => {
-
+ 
     var idP 
-    if(typeof  Cookies.get("perfil") != "undefined"){
-        idP = JSON.parse(Cookies.get("perfil")).id
+    var cookiePerfil = Cookies.get("perfil")
+    if(cookiePerfil != undefined){
+        idP = JSON.parse(cookiePerfil).id
     }else{
+        router.push('/perfis')
         return
     }
       
@@ -65,6 +70,13 @@ function Page({params}) {
 
   }
   useEffect(() => {  
+ 
+
+    var cookiePerfil = Cookies.get("perfil")
+    if(cookiePerfil == undefined){
+      router.push('/perfis')
+      return
+    }
 
     const handleFetchData = async () => {
 
@@ -89,8 +101,8 @@ function Page({params}) {
 
         let req = await fetch("/api/perfil/"+idP+"/lista_assistir/"+id_movie)
         let res = await req.json()  
-        if(res.status){ 
-            setAllowedUser(res.allowedUser)
+        setAllowedUser(res.allowedUser)
+        if(res.status){  
             setAssistirDps(true)    
         } 
     }
@@ -141,18 +153,22 @@ function Page({params}) {
             <div className='about_session'>
 
                 <h1 className='title_movie'>{load.title}</h1>
-                <p className='dataMovie'>{load.release_date.slice(0,4)}</p>
+                <div className='areaYearClassificacaoIndicativa'>
+                    <p className='dataMovie'>{load.release_date.slice(0,4)}</p>
+                    <ClassificacaoIndicativa> 
+                        {load.release_dates.results.find(x => x.iso_3166_1 == "BR")?.release_dates[0].certification}
+                    </ClassificacaoIndicativa>
 
-                <StarsIndicacao numStars={load.vote_average} />
+                </div>
 
-
+                <StarsIndicacao numStars={load.vote_average} /> 
+                
                 {allowedUser &&  <LinkEmb idMovie={id_movie} /> }
 
                 <h2 className='sobre_movie'>{load.overview}</h2>
                  
                 <div className='genres'>
-                    {load.genres && load.genres.map((e,index) => (
-                        
+                    {load.genres && load.genres.map((e,index) => ( 
                         <p key={index}>{e.name}</p> 
                     ))} 
                 </div>
@@ -181,7 +197,7 @@ function Page({params}) {
                 ))}  
             </CustomCarousel>
 
-            <iframe className='trailerYT' src={"https://www.youtube.com/embed/"+trailer} title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+            <iframe className='trailerYT' src={"https://www.youtube.com/embed/"+trailer} title="YouTube video player" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerPolicy="strict-origin-when-cross-origin" allowFullScreen></iframe>
             
             <h1 className='txt_similar'>Você também pode gostar...  </h1>
              <CustomCarousel>

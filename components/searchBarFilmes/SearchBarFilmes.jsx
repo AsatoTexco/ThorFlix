@@ -34,12 +34,14 @@ function SearchBarFilmes() {
             setPage(pageParam)
 
             if (!queryParam) {
-                if (typeof Cookies.get("perfil") == undefined) {
-                    router.push("/perfis")
-                    return
+                
+                var cookiePerfil = Cookies.get("perfil")
+                if(cookiePerfil == undefined){
+                  router.push('/perfis')
+                  return
                 }
 
-                var id_perfil = JSON.parse(Cookies.get("perfil")).id
+                var id_perfil = JSON.parse(cookiePerfil).id
                 let req = await fetch("/api/perfil/" + id_perfil + "/recommended")
                 let res = await req.json()
                 setData(res.result)

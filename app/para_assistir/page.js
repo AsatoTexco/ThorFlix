@@ -21,8 +21,12 @@ function Page() {
   const handleSetViewedMoviel = async (e,idMovie) => {
     
       var IdP 
-      if(typeof Cookies.get("perfil") != undefined){
-        IdP = JSON.parse(Cookies.get("perfil")).id
+      var cookiePerfil = Cookies.get("perfil")
+
+      if(cookiePerfil != undefined){ 
+        IdP = JSON.parse(cookiePerfil).id
+      }else{
+        router.push('/perfis')
       }
   
       let req = await fetch("/api/perfil/"+IdP+"/lista_assistir/"+idMovie,{
@@ -58,7 +62,7 @@ function Page() {
           }else{ 
               setPerfilMovies(false)
           } 
-      } 
+    } 
     
     var cookiePerfil = Cookies.get("perfil")
     if(cookiePerfil == undefined){
@@ -66,7 +70,7 @@ function Page() {
       return
     }
      
-    let id_perfil = JSON.parse(Cookies.get("perfil")).id
+    let id_perfil = JSON.parse(cookiePerfil).id
     handlerFetchMovies(id_perfil) 
     
 

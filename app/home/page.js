@@ -29,13 +29,9 @@ function Page() {
   useEffect(() => {
     
     const handleFetchDataFy = async () => {
-       
-      if(typeof Cookies.get("perfil") == undefined){
-        router.push("/perfis")
-        return 
-      }
-
+      
       var cookiePerfil = Cookies.get("perfil")
+ 
       if(cookiePerfil == undefined){
         router.push("/perfis")
         return 

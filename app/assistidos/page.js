@@ -6,14 +6,23 @@ import './assistidos.css'
 import Link from 'next/link';
 import Image from 'next/image';
 import LoadingCircles from '@components/loading/loadingCircles/LoadingCircles';
+import { useRouter } from 'next/navigation';
 
 function Page() {
   
   const [data, setData] = useState(false)
   const [perfilMovies, setPerfilMovies] = useState(true) 
+  const router = useRouter()
+  
+ 
 
   useEffect(() => { 
-    
+
+    var cookiePerfil = Cookies.get("perfil")
+    if(cookiePerfil == undefined){
+      router.push('/perfis')
+      return
+    } 
     const fetchMovieData  = async (id) => {
       let req = await fetch("/api/movies/"+id)
       let res = await req.json()
@@ -38,10 +47,15 @@ function Page() {
       } 
     }   
 
-    if(typeof Cookies.get("perfil") != undefined){
-      let id_perfil = JSON.parse(Cookies.get("perfil")).id
-      handlerFetchMovies(id_perfil) 
+    var cookiePerfil = Cookies.get("perfil")
+        if(cookiePerfil == undefined){
+          router.push('/perfis')
+          return
     } 
+
+    let id_perfil = JSON.parse(cookiePerfil).id
+    handlerFetchMovies(id_perfil) 
+ 
 
   },[])
 

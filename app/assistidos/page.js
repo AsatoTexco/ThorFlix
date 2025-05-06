@@ -57,7 +57,7 @@ function Page() {
     handlerFetchMovies(id_perfil) 
  
 
-  },[])
+  },[router])
 
 
 

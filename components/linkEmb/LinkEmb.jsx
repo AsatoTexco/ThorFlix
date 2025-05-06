@@ -4,13 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import './LinkEmb.css'
 
 function LinkEmb({idMovie}) {  
-
-  useEffect(() => {
-
-    console.log(idMovie)
-
-  }, [])
-
+ 
   return (
     <div className='areaCLR'> 
       

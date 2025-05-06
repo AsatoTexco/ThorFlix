@@ -119,7 +119,7 @@ function Page({params}) {
     handleFetchData()
     handleFetchSimilar()
      
-  },[id_movie])
+  },[id_movie,router])
 
   if(!load){
     if(!filmeEncontrado){
@@ -162,7 +162,7 @@ function Page({params}) {
                 </div>
 
                 <StarsIndicacao numStars={load.vote_average} /> 
-                
+
                 {allowedUser &&  <LinkEmb idMovie={id_movie} /> }
 
                 <h2 className='sobre_movie'>{load.overview}</h2>

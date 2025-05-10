@@ -52,7 +52,7 @@ function Page({params}) {
     var emailV = ""
     if(session.data == null){ 
         emailV = decodeJwt(Cookies.get("token")).email  
-    }else{ 
+    }else{  
         emailV = session.data.user.email
     } 
 

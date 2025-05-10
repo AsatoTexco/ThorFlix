@@ -81,7 +81,7 @@ function Page() {
     },0)
  
   }
-
+ 
   useEffect(() => {
 
     const handleValidLogin = async () => {
@@ -96,7 +96,8 @@ function Page() {
         let res = await req.json()
         
         if(res.status){
-          router.push("/perfis")  
+
+          // router.push("/perfis")  
         }else{
           signOut()
           setLoad(false)
@@ -112,6 +113,7 @@ function Page() {
   if(loading){
     return null
   } 
+  const newLocal = 'btn_login_facebook'
   return (
     <div className='area_login'>
       <form action={handleSubmit} className='card_login'>
@@ -124,7 +126,7 @@ function Page() {
             {/*<input type='password' value={password} onChange={(e) => {setPassword(e.target.value)}} placeholder='Password' className='input_txt'/>*/ }
         </div> 
         <div className='area_btns'>
-          <button type='reset' className='btn_login_facebook' onClick={handleFacebookCad}><FontAwesomeIcon icon="fa-brands fa-facebook" /></button>
+          {/* <button type='reset' className={newLocal} onClick={handleFacebookCad}><FontAwesomeIcon icon="fa-brands fa-facebook" /></button> */}
           <input className='btn_entrar' type='submit' value={"Continuar"} />  
           <Link href={"/login"}>Entrar</Link>
         </div>

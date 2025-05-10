@@ -3,19 +3,13 @@ import React from 'react'
 import './ClassificacaoIndicativa.css'
 
 function ClassificacaoIndicativa({children}) {
-
-    const colorsClass =  
-    [
-        "18" ,"16" ,"14" ,"12" ,"10" ,"L"   
-    ] 
-        
       
     if(!children || children == undefined){
         return <>
             <div className="areaClassificacao classNotFind"> 
                 <h1>{":("}</h1>
-                <div class="corner-1"></div>
-                <div class="corner-2"></div>
+                <div className="corner-1"></div>
+                <div className="corner-2"></div>
             </div> 
         </>
     }
@@ -24,8 +18,8 @@ function ClassificacaoIndicativa({children}) {
         <>
             <div className={"areaClassificacao class" + children}> 
                 {children}
-                <div class="corner-1"></div>
-                <div class="corner-2"></div>
+                <div className="corner-1"></div>
+                <div className="corner-2"></div>
             </div>
         
         </>

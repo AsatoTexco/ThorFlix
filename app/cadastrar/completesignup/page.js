@@ -9,17 +9,13 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { useRouter, useSearchParams } from 'next/navigation'
 import Cookies from 'js-cookie';
 
-import { useState } from 'react'
-
-
-
+import { useState } from 'react' 
  
 function Page() {
  
   const [password, setPassword] = useState('');
   const [confPassword, setConfPassword] = useState(''); 
-  const [nome, setNome] = useState('');
-
+  const [nome, setNome] = useState(''); 
 
   const [typeI, setTypeI] = useState(true)
   const [typeII, setTypeII] = useState(true)
@@ -27,24 +23,7 @@ function Page() {
   const router = useRouter()
   const seachParams = useSearchParams()
 
-  const [loadReq, setLoadReq] = useState(false)
-
-
-  const awaitTeste = async () => {
-
-    return new Promise(resolve => setTimeout( resolve,2000) )
-
-
-  }
-
-  const handleSubmit2 = (event) => { 
-     
-    setLoadReq(true)
-
-    awaitTeste()
-
-     
-  }
+  const [loadReq, setLoadReq] = useState(false) 
 
   const handleSubmit = (event) => {   
     setLoadReq(true)  

@@ -29,10 +29,11 @@ function Page() {
   Cookies.remove("token") 
   const session = useSession()
    
-  
+   
   useEffect(() => {
 
     const handleValidLogin = async () => {
+      
       const s = session
       if(s.status == "authenticated"){  
         let email = s.data.user.email
@@ -55,7 +56,7 @@ function Page() {
     }
     handleValidLogin()
 
-  },[router,session])
+  },[router,session])    
    
   const handleFacebookLogin = async (event) => {  
     await signIn('facebook')   
@@ -69,8 +70,7 @@ function Page() {
         email:email,password:password
       })
     })
-    let res = await req.json()  
- 
+    let res = await req.json()   
     
     if(res.status){ 
       const urlC = Cookies.get('urlCallback')
@@ -103,7 +103,7 @@ function Page() {
             <input type='password' value={password} onChange={(e) => {setPassword(e.target.value)}} placeholder='Password' className='input_txt' id='pass_input'/> 
         </div> 
         <div className='area_btns'>
-          <button type='reset' className='btn_login_facebook' onClick={handleFacebookLogin}><FontAwesomeIcon icon="fa-brands fa-facebook" /></button>
+          {/* <button type='reset' className='btn_login_facebook' onClick={handleFacebookLogin}><FontAwesomeIcon icon="fa-brands fa-facebook" /></button> */}
           <input className='btn_entrar' type='submit' value={"Entrar"} />  
           <Link href={"/cadastrar"}>Criar Conta</Link>
         </div>

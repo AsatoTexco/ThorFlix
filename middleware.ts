@@ -39,9 +39,14 @@ export async function middleware(request: NextRequest) {
     var token = ''   
     if(typeof cookie_token != "undefined"){
       token = cookie_token.value 
-      if(!decodeJwt(token)['id']){
+      try{ 
+        if(!decodeJwt(token)['id']){
+          res = NextResponse.redirect(new URL('/login', request.url)); 
+        } 
+      }
+      catch(erro){
         res = NextResponse.redirect(new URL('/login', request.url)); 
-      } 
+      }
       const secret = new TextEncoder().encode(process.env.JWT_WEB_TOKEN)
       try{
         await jwtVerify(token,secret)
@@ -84,5 +89,5 @@ export async function middleware(request: NextRequest) {
 
 // PATHS 
 export const config = {
-  matcher: ['/home','/minha-conta','/perfis','/filmes',"/filmes/:path*","/para_assistir","/assistidos"],
+  matcher: ['/home','/minha-conta','/perfis','/filmes',"/filmes/:path*","/para_assistir","/assistidos","/api/movies/:id/links_sites_oficiais"]
 }

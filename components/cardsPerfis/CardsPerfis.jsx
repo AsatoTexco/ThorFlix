@@ -39,7 +39,7 @@ function CardsPerfis() {
             let res = await req.json()
             
             if(res.status){ 
-                Cookies.set("perfil", JSON.stringify(res.result[0])) 
+                Cookies.set("perfil", JSON.stringify(res.result[0]))  
                 setData(res.result)  
             } 
         }

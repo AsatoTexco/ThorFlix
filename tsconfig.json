@@ -2,7 +2,9 @@
   "compilerOptions": {
     "baseUrl": "./",
     "paths": {
-      "@components/*": ["components/*"], 
+      "@components/*": [
+        "components/*"
+      ]
     },
     "lib": [
       "dom",
@@ -24,14 +26,16 @@
       {
         "name": "next"
       }
-    ]
+    ],
+    "target": "ES2017"
   },
   "include": [
     "next-env.d.ts",
     ".next/types/**/*.ts",
     "**/*.ts",
-    "**/*.tsx"
-, "middleware.ts"  ],
+    "**/*.tsx",
+    "middleware.ts"
+  ],
   "exclude": [
     "node_modules"
   ]

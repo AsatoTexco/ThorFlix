@@ -1,6 +1,6 @@
-![imagem site](https://iili.io/JLhI6F9.png)
+![imagem site](./foryouThorFlix.png)
 
-![imagem site](https://iili.io/JLhIPae.png)
+![imagem site](./movieMain.png)
 
 
 ## Requisitos

@@ -53,24 +53,49 @@ function Page() {
   }
 
 
+  const handleLogin = async (email,password) => {
+
+    let req = await fetch("/api/user/login",{
+      method:"POST",
+      body:JSON.stringify({
+        email:email,password:password
+      })
+    })
+    let res = await req.json()
+
+    if(res.status){
+      const urlC = Cookies.get('urlCallback')
+
+      Cookies.set("token",res.token)
+      if(urlC !== undefined){
+        Cookies.remove("urlCallback", { path: "/" });
+        router.replace(urlC)
+
+      }else{
+        router.push("/perfis")
+      }
+
+    }else{
+      alert("Credenciais Inválidas")
+    }
+
+  }
   const cadastrarUser = async () => {
 
-    const req = await fetch("/api/user/",{
+    const req = await fetch("/api/user",{
       method:"POST",
       body: JSON.stringify({
-        creation_id: seachParams.get("creation_id"),
+        creation_id: parseInt( seachParams.get("creation_id")),
         name: nome,
         password:password
       })
     })
 
     const res = await req.json()
-    
-    alert(res.message)
-    
-    if(res.status){
-      Cookies.set("token",res.tokenLoginAutomatic) 
-      router.push("/perfis")
+    if(res.message === "Usuário criado com Sucesso!"){
+      await handleLogin(res.email, password)
+    }else{
+      alert(res.message)
     }
 
     setLoadReq(false)
@@ -81,20 +106,17 @@ function Page() {
 
 
   const verifyPasswords = (password,password2) => { 
-    if(password.trim() !== password2.trim()){
-      return false
-    }
-    return true
+    return password.trim() === password2.trim();
   }
   const checkPreenchimento = (p1,p2,nome) => {
 
-    if(p1.trim().length == 0){ 
+    if(p1.trim().length === 0){
       return false
     }
-    if(p2.trim().length == 0){ 
+    if(p2.trim().length === 0){
       return false
     }
-    if(nome.trim().length == 0){ 
+    if(nome.trim().length === 0){
       return false
     }
 

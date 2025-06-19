@@ -1,0 +1,67 @@
+generator client {
+  provider = "prisma-client-js"
+  output   = "./prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("POSTGRES_URL_NO_SSL")
+}
+
+/// This model or at least one of its fields has comments in the database, and requires an additional setup for migrations: Read more: https://pris.ly/d/database-comments
+model allowed_users {
+  id                                Int     @id @default(autoincrement())
+  allowed_user_id                   String? @db.Uuid
+  link_para_plataforma_como_netflix String? @default("https://www.netflix.com/br/title/70103761")
+}
+
+model lista_assistir {
+  id        Int    @id @default(autoincrement())
+  id_perfil Int
+  id_movie  Int
+  genres    String @db.VarChar(255)
+  viewed    Int    @default(0)
+  perfis    perfis @relation(fields: [id_perfil], references: [id], onDelete: NoAction, onUpdate: NoAction)
+}
+
+model perfis {
+  id             Int              @id @default(autoincrement())
+  nome           String?          @db.VarChar(255)
+  id_usuario     String?          @db.Uuid
+  image          String?          @db.VarChar(255)
+  lista_assistir lista_assistir[]
+  users          users?           @relation(fields: [id_usuario], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_id_usuario")
+}
+
+model token_verify {
+  id           BigInt    @id @default(dbgenerated("generate_unique_id()"))
+  email        String?   @db.VarChar(255)
+  status       Boolean?  @default(false)
+  tf_token     String?   @db.VarChar(255)
+  confirmed_at DateTime? @db.Timestamp(6)
+  created_at   DateTime? @default(now()) @db.Timestamp(6)
+}
+
+model users {
+  id         String       @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  name       String?      @db.VarChar(255)
+  email      String?      @db.VarChar(255)
+  password   String?      @db.VarChar(255)
+  status     status_user?
+  created_at DateTime?    @default(now()) @db.Timestamp(6)
+  perfis     perfis[]
+}
+
+model usuarios {
+  id              Int       @id @default(autoincrement())
+  nome            String    @db.VarChar(100)
+  email           String    @unique @db.VarChar(255)
+  senha           String?   @db.VarChar(255)
+  data_nascimento DateTime? @db.Date
+}
+
+enum status_user {
+  pending
+  confirmed
+  blocked
+}

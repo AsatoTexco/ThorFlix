@@ -241,7 +241,7 @@ const ConfirmarEmailLink = `
           <!-- start unsubscribe -->
           <tr>
             <td align="center" bgcolor="#e9ecef" style="padding: 12px 24px; font-family: 'Source Sans Pro', Helvetica, Arial, sans-serif; font-size: 14px; line-height: 20px; color: #666;">
-              <p style="margin: 0;">ThorFlix © 2024 - Todos os direitos reservados  </p>
+              <p style="margin: 0;">ThorFlix © 2025 - Todos os direitos reservados  </p>
             </td>
           </tr>
           <!-- end unsubscribe -->

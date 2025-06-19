@@ -76,7 +76,7 @@ function Page() {
       const urlC = Cookies.get('urlCallback')
 
       Cookies.set("token",res.token) 
-      if(urlC != undefined){
+      if(urlC !== undefined){
         Cookies.remove("urlCallback", { path: "/" }); 
         router.replace(urlC)
  

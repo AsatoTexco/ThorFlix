@@ -39,3 +39,8 @@ next-env.d.ts
 sql.sql
 
 .vscode/
+/prisma/prisma
+
+/prisma/prisma
+
+.idea/

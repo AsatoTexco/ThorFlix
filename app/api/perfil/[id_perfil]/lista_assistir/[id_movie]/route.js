@@ -5,8 +5,7 @@ import { NextResponse } from 'next/server';
 export async function GET(request,{params}) {
   try {  
   
-    const id_perfil = params.id_perfil
-    const id_movie = params.id_movie   
+    const {id_perfil, id_movie } = await params
     const result = await sql.query("SELECT * FROM lista_assistir WHERE id_perfil = $1 AND id_movie = $2",[id_perfil, id_movie])  
     const r = await sql.query("SELECT * FROM perfis INNER JOIN allowed_users ON perfis.id_usuario = allowed_users.allowed_user_id  WHERE perfis.id = $1", [id_perfil])
  
@@ -24,8 +23,7 @@ export async function GET(request,{params}) {
 
 export async function PUT(request,{params}) {
   try {  
-    const id_perfil = params.id_perfil
-    const id_movie = params.id_movie 
+    const {id_perfil, id_movie} = await params
 
     const result =  await sql.query("UPDATE lista_assistir SET viewed = 1 WHERE id_perfil = $1 AND id_movie = $2 RETURNING * ", [id_perfil, id_movie])
   

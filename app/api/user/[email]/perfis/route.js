@@ -4,9 +4,9 @@ import { NextResponse } from 'next/server';
 
 export async function GET(request,{params}) {
   try {
-    const email_user = params.email
+    const {email} = await params
     
-    const findByEmail = await sql.query("SELECT * FROM users WHERE email = $1",[email_user])
+    const findByEmail = await sql.query("SELECT * FROM users WHERE email = $1",[email])
     
     if(findByEmail.rowCount == 0){
       return NextResponse.json({ status: false, error: "Nenhum Usuário Encontrado" }, { status: 200 });
@@ -31,9 +31,9 @@ export async function POST(request,{params}) {
 
     const { nome } = body
 
-    const email_user = params.email
+    const {email} = await params
       
-    const findByEmail = await sql.query("SELECT * FROM users WHERE email = $1",[email_user])
+    const findByEmail = await sql.query("SELECT * FROM users WHERE email = $1",[email])
 
     const id_user =  findByEmail.rows[0].id  
 

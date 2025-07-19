@@ -6,7 +6,7 @@ export async function GET(request,{params}) {
   try { 
 
     
-    const idMovie = params.id 
+    const {id: idMovie} = await params
        
     const secret = new TextEncoder().encode(process.env.JWT_WEB_TOKEN)
     const cookie_token = request.cookies.get("token") 

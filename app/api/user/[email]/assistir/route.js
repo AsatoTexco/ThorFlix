@@ -4,7 +4,7 @@ import { NextResponse } from 'next/server';
 export async function POST(request,{params}) {
   try {
 
-    const email_user = params.email
+    const {email: email_user} = await params
     const body = await request.json()
 
     const {id_movie, id_perfil, genres} = body 

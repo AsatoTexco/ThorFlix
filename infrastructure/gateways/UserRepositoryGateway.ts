@@ -2,10 +2,16 @@ import {UserGateway} from "@/application/useCases/gateways/UserGateway";
 import {User} from "@/domain/entities/User";
 import {Perfil} from "@/domain/entities/Perfil";
 import prisma from "@/utils/prisma";
-import { status_user } from "@/prisma/prisma/client"
+import {status_user, users} from "@/prisma/prisma/client"
 import {UserEntityDomainMapper} from "@/infrastructure/mappers/user/UserEntityDomainMapper"
+import {UserRepository} from "@/infrastructure/repositories/UserRepository";
 
 export class UserRepositoryGateway implements UserGateway{
+
+    constructor(
+        private readonly userRepository: UserRepository
+    ) {}
+
 
      async createUser(user: User, perfil: Perfil): Promise<User> {
 
@@ -25,20 +31,17 @@ export class UserRepositoryGateway implements UserGateway{
              }
          }))
 
-
      }
 
     async findUserByEmail(email: string): Promise<User | null> {
+        // converter dado para repository X
+        // fazer a ação no repository #
+        // converter dado para domain
 
-         const data = await prisma.users.findFirst({
-             where: {
-                 email:email
-             }
-         })
-
+        const data: users = await this.userRepository.findUserByEmail(email)
         if(data == null) return data
-        return User.create(data.name, data.email, data.password, data.status, data.created_at)
-     }
+        return UserEntityDomainMapper.toDomain(data)
+    }
 
 
 }

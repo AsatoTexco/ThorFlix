@@ -7,7 +7,7 @@ export async function GET(request,{params}) {
 
     const MOVIE_API = process.env.MOVIE_API
      
-    const id_perfil = params.id_perfil  
+    const {id_perfil} = await params
     const q1 = await sql.query("SELECT * FROM lista_assistir WHERE id_perfil = $1",[id_perfil]) 
     const dataLista = q1.rows 
     const sortOb = {};

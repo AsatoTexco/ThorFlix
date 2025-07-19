@@ -4,7 +4,7 @@ import { NextResponse } from 'next/server';
 export async function GET(request,{params}) {
   try {
 
-    const id = params.id 
+    const {id} = await params
     const MOVIE_API = process.env.MOVIE_API
 
 

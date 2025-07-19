@@ -6,7 +6,7 @@ export async function GET(request,{params}) {
   try {  
     const url = new URL(request.url);
     var viewed = url.searchParams.get('viewed');
-    const id_perfil = params.id_perfil 
+    const {id_perfil} = await params
 
     var result
 

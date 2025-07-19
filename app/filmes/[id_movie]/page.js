@@ -23,7 +23,7 @@ import { useSession } from 'next-auth/react';
 import LoadingCircles from '@components/loading/loadingCircles/LoadingCircles';
 import { useRouter } from 'next/navigation';
 
-function Page({params}) {
+    function Page({params}) {
 
   const [load, setLoad] = useState(false)
   const [trailer, setTrailer] = useState('')
@@ -35,7 +35,7 @@ function Page({params}) {
   const session = useSession()
   const router = useRouter() 
 
-  const id_movie = params.id_movie 
+  const {id_movie} = React.use(params)
   
    
   const handleSalvarAssistir = async (genres,id_movie) => {

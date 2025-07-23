@@ -7,6 +7,7 @@ import {TokenVerifyGateway} from "@/application/useCases/gateways/TokenVerifyGat
 import {UserRepository} from "@/infrastructure/repositories/UserRepository";
 import {UserEntityDomainMapper} from "@/infrastructure/mappers/user/UserEntityDomainMapper";
 import {TokenVerifyRepository} from "@/infrastructure/repositories/TokenVerifyRepository";
+import {UserUseCaseInteface} from "@/application/useCases/user/UserUseCaseInteface";
 
 
 export const userRepository = new UserRepository()
@@ -17,4 +18,4 @@ const tokenVerifyGateway: TokenVerifyGateway = new TokenVerifyRepositoryGateway(
 
 
 export const tokenVerifyUseCase = new TokenVerifyUseCase(tokenVerifyGateway)
-export const userUseCase = new UserUseCase(userGateway, tokenVerifyUseCase)
+export const userUseCase: UserUseCaseInteface = new UserUseCase(userGateway, tokenVerifyUseCase)

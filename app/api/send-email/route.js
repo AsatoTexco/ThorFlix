@@ -8,7 +8,7 @@ export async function POST(request) {
 
     const body = await request.json();
     const { to, subject, html } = body; 
- 
+
     const transporter = await nodemailer.createTransport({
         host:  process.env.GMAIL_HOST , // Servidor SMTP
         port:  process.env.GMAIL_PORT , // Porta
@@ -17,15 +17,19 @@ export async function POST(request) {
             user: process.env.APP_EMAIL_GMAIL,
             pass: process.env.APP_SENHA_GMAIL,
         },
-    }); 
-
-    const info = await transporter.sendMail({
-        from: `<${process.env.EMAIL_USER}>`,
-        to,  
-        subject, 
-        html,  
     });
+    try{
 
+        const info = await transporter.sendMail({
+            from: `<${process.env.EMAIL_USER}>`,
+            to,
+            subject,
+            html,
+        });
+
+    }catch (e){
+        console.log(e)
+    }
     return NextResponse.json({ info }, { status: 201 });
 
   } catch (error) {

@@ -24,6 +24,10 @@ const nextConfig = {
             protocol: 'https',
             hostname: 'platform-lookaside.fbsbx.com', 
           },
+          {
+            protocol: 'https',
+            hostname: 's2-g1.glbimg.com',
+          },
         ],
       },
 };

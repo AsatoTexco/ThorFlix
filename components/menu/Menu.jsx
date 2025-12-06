@@ -39,7 +39,7 @@ function Menu() {
             <div className='area_img_menu'> 
                 <Image width={512} height={512} alt='imagem representativa' onClick={(e) => {
                     setSubMenuVisible(!subMenuVisible)
-                }} src={   "https://thor-flix.vercel.app/logo/thor-hammer-icon_512x512.png" }/>
+                }} src="/logo/thor-hammer-icon_512x512.png"/>
             </div>
         </div>
     </nav>

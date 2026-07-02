@@ -5,7 +5,7 @@ on: push
 jobs:
   cypress-run:
     runs-on: ubuntu-24.04
-    steps:
+    steps:  
       - name: Checkout
         uses: actions/checkout@v6
       # Install npm dependencies, cache them correctly

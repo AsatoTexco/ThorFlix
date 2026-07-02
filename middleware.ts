@@ -19,12 +19,7 @@ function getCookieValue(cookieString, cookieName) {
             return cookie.substring(cookieName.length + 1);
         }
     } 
-
-
-
-    
   }
-
 
   // se o cookie não for encontrado
   return null;

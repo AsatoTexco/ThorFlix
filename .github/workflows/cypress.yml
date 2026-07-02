@@ -5,6 +5,32 @@ on: push
 jobs:
   cypress-run:
     runs-on: ubuntu-24.04
+
+    env:
+      POSTGRES_URL: ${{ vars.POSTGRES_URL }}
+      POSTGRES_PRISMA_URL: ${{ vars.POSTGRES_PRISMA_URL }}
+      POSTGRES_URL_NO_SSL: ${{ vars.POSTGRES_URL_NO_SSL }}
+      POSTGRES_URL_NON_POOLING: ${{ vars.POSTGRES_URL_NON_POOLING }}
+      POSTGRES_USER: ${{ vars.POSTGRES_USER }}
+      POSTGRES_HOST: ${{ vars.POSTGRES_HOST }}
+      POSTGRES_PASSWORD: ${{ vars.POSTGRES_PASSWORD }}
+      POSTGRES_DATABASE: ${{ vars.POSTGRES_DATABASE }}
+      JWT_WEB_TOKEN: ${{ vars.JWT_WEB_TOKEN }}
+      FACEBOOK_CLIENT_ID: ${{ vars.FACEBOOK_CLIENT_ID }}
+      FACEBOOK_CLIENT_SECRET: ${{ vars.FACEBOOK_CLIENT_SECRET }}
+      NEXTAUTH_URL: ${{ vars.NEXTAUTH_URL }}
+      NEXTAUTH_SECRET: ${{ vars.NEXTAUTH_SECRET }}
+      MOVIE_API: ${{ vars.MOVIE_API }}
+      EMAIL_USER: ${{ vars.EMAIL_USER }}
+      APP_EMAIL_GMAIL: ${{ vars.APP_EMAIL_GMAIL }}
+      APP_SENHA_GMAIL: ${{ vars.APP_SENHA_GMAIL }}
+      GMAIL_PORT: ${{ vars.GMAIL_PORT }}
+      GMAIL_HOST: ${{ vars.GMAIL_HOST }}
+      GMAIL_SSL: ${{ vars.GMAIL_SSL }}
+      TF_TOKEN_RANDOM: ${{ vars.TF_TOKEN_RANDOM }}
+      THORFLIX_HOST_URL: ${{ vars.THORFLIX_HOST_URL }}
+      
+
     steps:  
       - name: Checkout
         uses: actions/checkout@v6

@@ -21,6 +21,7 @@ function getCookieValue(cookieString, cookieName) {
     } 
   }
 
+  
   // se o cookie não for encontrado
   return null;
 }

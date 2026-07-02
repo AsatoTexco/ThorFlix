@@ -39,3 +39,5 @@ next-env.d.ts
 sql.sql
 
 .vscode/
+
+cypress/screenshots/*

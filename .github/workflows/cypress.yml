@@ -1,0 +1,45 @@
+name: Cypress Tests
+
+on: push
+
+jobs:
+  cypress-run:
+    runs-on: ubuntu-24.04
+
+    env:
+      POSTGRES_URL: ${{ secrets.POSTGRES_URL }}
+      POSTGRES_PRISMA_URL: ${{ secrets.POSTGRES_PRISMA_URL }}
+      POSTGRES_URL_NO_SSL: ${{ secrets.POSTGRES_URL_NO_SSL }}
+      POSTGRES_URL_NON_POOLING: ${{ secrets.POSTGRES_URL_NON_POOLING }}
+      POSTGRES_USER: ${{ secrets.POSTGRES_USER }}
+      POSTGRES_HOST: ${{ secrets.POSTGRES_HOST }}
+      POSTGRES_PASSWORD: ${{ secrets.POSTGRES_PASSWORD }}
+      POSTGRES_DATABASE: ${{ secrets.POSTGRES_DATABASE }}
+      JWT_WEB_TOKEN: ${{ secrets.JWT_WEB_TOKEN }}
+      FACEBOOK_CLIENT_ID: ${{ secrets.FACEBOOK_CLIENT_ID }}
+      FACEBOOK_CLIENT_SECRET: ${{ secrets.FACEBOOK_CLIENT_SECRET }}
+      NEXTAUTH_URL: ${{ secrets.NEXTAUTH_URL }}
+      NEXTAUTH_SECRET: ${{ secrets.NEXTAUTH_SECRET }}
+      MOVIE_API: ${{ secrets.MOVIE_API }}
+      EMAIL_USER: ${{ secrets.EMAIL_USER }}
+      APP_EMAIL_GMAIL: ${{ secrets.APP_EMAIL_GMAIL }}
+      APP_SENHA_GMAIL: ${{ secrets.APP_SENHA_GMAIL }}
+      GMAIL_PORT: ${{ secrets.GMAIL_PORT }}
+      GMAIL_HOST: ${{ secrets.GMAIL_HOST }}
+      GMAIL_SSL: ${{ secrets.GMAIL_SSL }}
+      TF_TOKEN_RANDOM: ${{ secrets.TF_TOKEN_RANDOM }}
+      THORFLIX_HOST_URL: ${{ secrets.THORFLIX_HOST_URL }}
+      
+
+    steps:  
+      - name: Checkout
+        uses: actions/checkout@v6
+      # Install npm dependencies, cache them correctly
+      # and run all Cypress tests
+      - name: Cypress run
+        uses: cypress-io/github-action@v7
+        
+        with:
+          record: true
+          build: npm run build
+          start: npm start

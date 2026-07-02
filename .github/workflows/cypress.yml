@@ -38,6 +38,8 @@ jobs:
       # and run all Cypress tests
       - name: Cypress run
         uses: cypress-io/github-action@v7
+        
         with:
+          record: true
           build: npm run build
           start: npm start

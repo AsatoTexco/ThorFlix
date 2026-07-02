@@ -40,3 +40,4 @@ sql.sql
 
 .vscode/
 
+cypress/screenshots/*

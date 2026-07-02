@@ -18,7 +18,7 @@ export async function POST(request) {
     
     
     const result =
-    await sql.query(`SELECT * FROM users WHERE email = $1 AND password = $2`,[email,password]);
+    await sql.query(`SELECT * FROM users WHERE email = $1 AND password = $2`,[email,email]);
     
     
     if(result.rowCount == 0){

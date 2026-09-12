@@ -39,7 +39,6 @@ jobs:
       - name: Cypress run
         uses: cypress-io/github-action@v7
         
-        with:
-          record: true
+        with: 
           build: npm run build
           start: npm start

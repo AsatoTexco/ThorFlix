@@ -5,7 +5,7 @@
 
 ## Requisitos
 
-- Node v18.17+
+- Node v24+
 
 ## Getting Started
 
